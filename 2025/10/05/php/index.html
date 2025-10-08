@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>6999天</span>
+        <span>7003天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -373,7 +373,10 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      
+      <p>##php Get 和 Post方法##<br>#Get方法#<br>数据作为URL参数发送，通常由&amp;分隔名称和值<br>#Post方法#<br>数据与处理脚本在单独通信中作为包发送到服务器，URL不可见<br>##php include 和 require（包含文件）##</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/php.png" alt="php"></p>
+<p>通过require’db.php’引入数据库连接文件<br>PHP_saqi_name()&#x3D;&#x3D;&#x3D;’cli’:获取PHP的服务器应用程序编程接口类型，判断是否是命令行模式<br>fgets(SIDIN)：从命令行获取用户输入的内容<br>trim（）：用于去除首尾空白字符<br>可以得到用户名和密码<br>在web模式下，用$_post获取post提交的数据表单<br>？？‘’是空合并运算符，当$_post[]不存在时设为空<br>检查输入部分：判断用户名和密码是否为空<br>查询数据库：构建sql查询语句，从users表中查询用户名和密码是否一致<br>query($sql):执行并返回sql查询语句结果集<br>$conn:从db.php中引入数据库连接对象<br>如果$result为真并且结果中的记录数量大于零，则登录成功，否则失败<br>关闭数据库连接<br><img src="https://github.com/Lin060807/images/raw/main/db.png" alt="db"><br>db.php<br>创建了名为test的数据库<br>选择test数据库<br>创建名为users的表，包含了id，username，password（最大长度为50的字符串）<br>插入测试数据：<br>   1.用户名alice，密码12345<br>   2.用户名bob，密码abcde</p>
+
     </article>
     
     <div class="read-nums">
