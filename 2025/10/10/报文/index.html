@@ -373,7 +373,26 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      
+      <h2 id="http的概念"><a href="#http的概念" class="headerlink" title="http的概念"></a>http的概念</h2><p>#协议作用</p>
+<p>http是Web应用的通信规范，定义了客户端与服务器之间的请求&#x2F;响应规则</p>
+<p>#请求方式</p>
+<p>1.GET：获取资源，参数在URL中（如？id&#x3D;1）<br>2.POST：提交数据，参数在请求体中<br>3.无状态性：HTTP本身不记录会话状态，通过Cookie，Session等技术实现用户身份</p>
+<p>#请求头</p>
+<p>请求头是客户端向服务器发送请求时附带的元信息字段<br>Host：指定目标服务器的域名或IP<br>User- Agent：客户端浏览器、系统、内核的标识，服务器可据此适配内容<br>Cookie：客户端存储的会话标识，用于身份认证、会话保持<br>Content—Type：请求体的数据格式<br>Content—Length：请求体的字节长度<br>Referer：记录请求的来源页面URL<br>Accept：客户端可接受的响应数据格式<br>Accept- Encoding：客户端支持的压缩编码</p>
+<p>#响应头</p>
+<p>响应头是服务器向客户端返回响应时附带的元信息字段<br>HTTP&#x2F;1.1 200 OK：响应行，包含了HTTP版本、状态码、状态描述<br>Server：服务器软件标识（如Apache、Nginx）<br>Set- Cookie：服务器向客户端设置Cookie，用于身份认证、会话管理<br>Content- Type：响应体的数据格式<br>Content- Length：响应体的字节长度<br>Location：配合301&#x2F;302状态码，指定重定向的目标URL<br>Cache- Control：控制客户端缓存策略<br>Expires：响应的过期时间</p>
+<p>#状态码</p>
+<p>200：成功，服务器正常返回请求的资源<br>301:永久重定向（如网站域名变更后，旧URL跳转到新URL）<br>302：临时重定向（如登录后临时跳转到用户中心页面）<br>404:未找到（资源不存在）<br>500:服务器内部错误（服务器代码逻辑出错）</p>
+<p>##HTTP报文结构</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/%E4%BB%BB%E5%8A%A1%E4%B8%80.png" alt="任务一"></p>
+<p>#请求行</p>
+<p>POST&#x2F;api&#x2F;graphs&#x2F;fulltext-search?haha&#x3D;123 HTTP&#x2F;1.1<br>POST:请求方法，客户端向服务端提交数据<br>&#x2F;api&#x2F;graphs&#x2F;fulltext-search：请求路径<br>?haha&#x3D;123：URL查询参数<br>HTTP&#x2F;1.1：HTTP协议版本</p>
+<p>#请求头</p>
+<p>Host：本地<br>Cookie：身份证明<br>User-Agent：使用Edge基于Chrome内核，运行在Windows 10 64位系统上<br>Sec-Ch-Ua：浏览器版本<br>Sec-Ch-Ua-Mobile：非移动设备<br>Accept：客户端可接受的响应数据格式<br>Referer：请求来源页面URL<br>Accept-Encoding：客户端支持的压缩编码方式为gzip、deflate、br<br>Accept- Language：客户端偏好语言<br>Connection：请求完成后关闭TCP连接<br>Content- Type：请求体的数据格式为URL编码的表单数据格式（请求体内容会以key&#x3D;value&amp;key2&#x3D;value2的格式组织）<br>Content- Length：响应体的字节长度为26</p>
+<p>#空行</p>
+<p>#请求体</p>
+<p>符合Content- Type的格式，包含indexName（值为gitHub）和keyword（值为1）两个参数</p>
+
     </article>
     
     <div class="read-nums">
@@ -394,7 +413,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">http的概念</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
