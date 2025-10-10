@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"html","path":"2025/10/05/html/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"php","path":"2025/10/05/php/"},{"title":"post型union","path":"2025/10/05/post型union/"},{"title":"union注入","path":"2025/10/04/union注入/"},{"title":"报错注入","path":"2025/10/04/报错注入/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"html","path":"2025/10/05/html/"},{"title":"php","path":"2025/10/05/php/"},{"title":"post型union","path":"2025/10/05/post型union/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"union注入","path":"2025/10/04/union注入/"},{"title":"报文","path":"2025/10/10/报文/"},{"title":"报错注入","path":"2025/10/04/报错注入/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -327,11 +327,11 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>9 篇</span>
+        <span>11 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
-        <span>昨天</span>
+        <span>今天</span>
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
@@ -354,6 +354,21 @@
 
 <div class="index">
   <div class="index-left">
+    
+      <div class="index-article">
+        <!-- <img class="index-article--cover" src="/imgs/default-cover.webp" alt=""> -->
+        <div class="index-article--box">
+          <img class="index-article--cover" data-cover="imgs/default-cover.webp" alt="sql" />
+        </div>
+        <div class="index-article--content">
+          <a href="/2025/10/10/sql/">sql </a>
+          <div>
+            
+            
+          </div>
+          <div class="bg"></div>
+        </div>
+      </div>
     
       <div class="index-article">
         <!-- <img class="index-article--cover" src="/imgs/default-cover.webp" alt=""> -->
@@ -406,6 +421,21 @@
       <div class="index-article">
         <!-- <img class="index-article--cover" data-cover="" src="/imgs/default-cover.webp" alt=""> -->
         <div class="index-article--box">
+          <img class="index-article--cover" data-cover="imgs/default-cover.webp" alt="报文" />
+        </div>
+        <div class="index-article--content">
+          <a href="/2025/10/10/%E6%8A%A5%E6%96%87/">报文 </a>
+          <div>
+            
+            
+          </div>
+          <div class="bg"></div>
+        </div>
+      </div>
+    
+      <div class="index-article">
+        <!-- <img class="index-article--cover" data-cover="" src="/imgs/default-cover.webp" alt=""> -->
+        <div class="index-article--box">
           <img class="index-article--cover" data-cover="imgs/default-cover.webp" alt="html" />
         </div>
         <div class="index-article--content">
@@ -453,10 +483,14 @@
     <div class="index-right-wrapper">
       
       
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">2025年10月</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">2025年09月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">2024年09月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">2024年08月</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">2025年10月</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">2025年09月</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">2024年09月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">2024年08月</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 </div>
+
+  <div class="page">
+    <span class="page-number current">1</span>
+  </div>
 
 
 <script>
