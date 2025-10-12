@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"php","path":"2025/10/05/php/"},{"title":"post型union","path":"2025/10/05/post型union/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"union注入","path":"2025/10/04/union注入/"},{"title":"报文","path":"2025/10/10/报文/"},{"title":"报错注入","path":"2025/10/04/报错注入/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -327,7 +327,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>10 篇</span>
+        <span>7 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -374,6 +374,7 @@
     </div>
     <article class="article-content markdown-body">
       <h1 id="GET提交和POST提交的区别"><a href="#GET提交和POST提交的区别" class="headerlink" title="GET提交和POST提交的区别"></a>GET提交和POST提交的区别</h1><p>1.get提交可以被缓存，post提交不会<br>2.get提交参数会保留在历史记录，post提交不会<br>3.get提交可以收集为书签，post提交不会<br>4.get提交有长度限制2048个字符，post提交无限制，可以使用二进制数据<br>post提交更安全</p>
+<h1 id="sql注入工作原理"><a href="#sql注入工作原理" class="headerlink" title="sql注入工作原理"></a>sql注入工作原理</h1><p>输入验证不足：当Web应用程序没有正确验证用户输入时，攻击者可以在输入字段中插入SQL代码。<br>拼接SQL语句：应用程序后端通常将用户输入与SQL查询拼接在一起，形成完整的数据库查询语句。<br>执行恶意SQL：如果应用程序没有对输入进行适当的清理或转义，恶意SQL代码将被数据库服务器执行。<br>数据泄露或破坏：攻击者可以利用SQL注入来查询、修改或删除数据库中的数据，或者执行数据库管理系统的系统命令。</p>
 
     </article>
     
@@ -395,7 +396,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GET%E6%8F%90%E4%BA%A4%E5%92%8CPOST%E6%8F%90%E4%BA%A4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">GET提交和POST提交的区别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GET%E6%8F%90%E4%BA%A4%E5%92%8CPOST%E6%8F%90%E4%BA%A4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">GET提交和POST提交的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">sql注入工作原理</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
@@ -403,7 +404,7 @@
           
             <p>
               <span>下一篇</span>
-              <a href="/2025/10/10/报文/">报文</a>
+              <a href="/2025/10/05/php/">php</a>
             </p>
           
         </div>
