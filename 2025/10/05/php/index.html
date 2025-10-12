@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"php","path":"2025/10/05/php/"},{"title":"post型union","path":"2025/10/05/post型union/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"union注入","path":"2025/10/04/union注入/"},{"title":"报文","path":"2025/10/10/报文/"},{"title":"报错注入","path":"2025/10/04/报错注入/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"Hello World","path":"2024/09/28/hello-world/"},{"title":"php","path":"2025/10/05/php/"},{"title":"post型union","path":"2025/10/05/post型union/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"union注入","path":"2025/10/04/union注入/"},{"title":"报文","path":"2025/10/10/报文/"},{"title":"报错注入","path":"2025/10/04/报错注入/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -331,7 +331,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
-        <span>昨天</span>
+        <span>今天</span>
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
@@ -373,10 +373,22 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <h2 id="php-Get-和-Post方法"><a href="#php-Get-和-Post方法" class="headerlink" title="php Get 和 Post方法"></a>php Get 和 Post方法</h2><h1 id="Get方法"><a href="#Get方法" class="headerlink" title="Get方法"></a>Get方法</h1><p>数据作为URL参数发送，通常由&amp;分隔名称和值</p>
-<h1 id="Post方法"><a href="#Post方法" class="headerlink" title="Post方法"></a>Post方法</h1><p>数据与处理脚本在单独通信中作为包发送到服务器，URL不可见</p>
-<h2 id="php-include-和-require（包含文件）"><a href="#php-include-和-require（包含文件）" class="headerlink" title="php include 和 require（包含文件）"></a>php include 和 require（包含文件）</h2><p><img src="https://github.com/Lin060807/images/raw/main/php.png" alt="php"></p>
+      <p>题目：</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/php.png" alt="php"></p>
 <p>通过require’db.php’引入数据库连接文件<br>PHP_saqi_name()&#x3D;&#x3D;&#x3D;’cli’:获取PHP的服务器应用程序编程接口类型，判断是否是命令行模式<br>fgets(SIDIN)：从命令行获取用户输入的内容<br>trim（）：用于去除首尾空白字符<br>可以得到用户名和密码<br>在web模式下，用$_post获取post提交的数据表单<br>？？‘’是空合并运算符，当$_post[]不存在时设为空<br>检查输入部分：判断用户名和密码是否为空<br>查询数据库：构建sql查询语句，从users表中查询用户名和密码是否一致<br>query($sql):执行并返回sql查询语句结果集<br>$conn:从db.php中引入数据库连接对象<br>如果$result为真并且结果中的记录数量大于零，则登录成功，否则失败<br>关闭数据库连接<br><img src="https://github.com/Lin060807/images/raw/main/db.png" alt="db"><br>db.php<br>创建了名为test的数据库<br>选择test数据库<br>创建名为users的表，包含了id，username，password（最大长度为50的字符串）<br>插入测试数据：<br>   1.用户名alice，密码12345<br>   2.用户名bob，密码abcde</p>
+<h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><p>##php语法</p>
+<p>#php基本语法</p>
+<p>1.echo 用于输出内容。<br>2.每条语句末尾要加 ;</p>
+<h1 id="php中的注释"><a href="#php中的注释" class="headerlink" title="php中的注释"></a>php中的注释</h1><p>单行注释：<br>1.使用 &#x2F;&#x2F;<br>2.使用 #</p>
+<p>多行注释：<br>使用 &#x2F;* … *&#x2F;</p>
+<p>##php变量</p>
+<p>变量以 $ 符号开始，后面跟着变量的名称<br>变量名必须以字母或者下划线字符开始<br>变量名只能包含字母、数字以及下划线（A-z、0-9 和 _ ）<br>变量名不能包含空格<br>变量名是区分大小写的（$y 和 $Y 是两个不同的变量）</p>
+<h1 id="PHP变量作用域"><a href="#PHP变量作用域" class="headerlink" title="PHP变量作用域"></a>PHP变量作用域</h1><p>1.global关键字用于函数内访问全局变量。<br>  在函数内调用函数外定义的全局变量，我们需要在函数中的变量前加上 global 关键字<br>  eg.</p>
+<p>‘’’sql<br>  &lt;?php<br>$x&#x3D;5;<br>$y&#x3D;10;</p>
+<p>function myTest()<br>{<br>    global $x,$y;<br>    $y&#x3D;$x+$y;<br>}</p>
+<p>myTest();<br>echo $y; &#x2F;&#x2F; 输出 15<br>?&gt;<br>‘’’</p>
+<h2 id="php-Get-和-Post方法"><a href="#php-Get-和-Post方法" class="headerlink" title="php Get 和 Post方法"></a>php Get 和 Post方法</h2><h1 id="Get方法"><a href="#Get方法" class="headerlink" title="Get方法"></a>Get方法</h1><p>数据作为URL参数发送，通常由&amp;分隔名称和值</p>
+<h1 id="Post方法"><a href="#Post方法" class="headerlink" title="Post方法"></a>Post方法</h1><p>数据与处理脚本在单独通信中作为包发送到服务器，URL不可见</p>
 
     </article>
     
@@ -398,7 +410,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#php-Get-%E5%92%8C-Post%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">php Get 和 Post方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">Get方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Post%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">Post方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#php-include-%E5%92%8C-require%EF%BC%88%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">php include 和 require（包含文件）</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#php"><span class="toc-number">1.</span> <span class="toc-text">php</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A"><span class="toc-number"></span> <span class="toc-text">php中的注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number"></span> <span class="toc-text">PHP变量作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#php-Get-%E5%92%8C-Post%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">php Get 和 Post方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">Get方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Post%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">Post方法</span></a>
       </div>
       
         <div class="catelogue catelogue-2">
