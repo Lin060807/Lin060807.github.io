@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——小站首页 | Hexo</title>
+  <title>我的技术与生活——报文 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——小站首页`
+    document.title = `我的技术与生活——报文`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -344,128 +344,136 @@
     </div>
   </div>
 </div></div>
-      <div id="main-container" class="main-container"><link rel="stylesheet" href="/css/partial/archive.css" />
+      <div id="main-container" class="main-container">
 
 
+  <link rel="stylesheet" href="/css/partial/article.css" />
 
-    <div class="archive">
-        <h1 class="archive-title">我の博客归档记录</h1>
-        <ul class="archive-list">
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">报文</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
             
-                <li class="archive-list__year">
-                    <h2>2024年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第08の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/">How to build up a blog site using Hexo and Guithub Pages</a>
-                                                <span>08月21日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/28/hello-world/">Hello World</a>
-                                                <span>09月28日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/15/虚拟机搭建/">虚拟机搭建</a>
-                                                <span>09月15日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
             
-                <li class="archive-list__year">
-                    <h2>2025年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第10の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/php/">php</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/post型union/">post型union</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/sql/">sql</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/union注入/">union注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/报文/">报文</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/报错注入/">报错注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/09/19/VScode/">VScode</a>
-                                                <span>09月19日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
-            
-        </ul>
+          </div>
+          
+          <p class="article-info--date">日期：2025-10-10 16:50:36</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
+      </div>
     </div>
+    <article class="article-content markdown-body">
+      <h2 id="http的概念"><a href="#http的概念" class="headerlink" title="http的概念"></a>http的概念</h2><p>#协议作用</p>
+<p>http是Web应用的通信规范，定义了客户端与服务器之间的请求&#x2F;响应规则</p>
+<p>#请求方式</p>
+<p>1.GET：获取资源，参数在URL中（如？id&#x3D;1）<br>2.POST：提交数据，参数在请求体中<br>3.无状态性：HTTP本身不记录会话状态，通过Cookie，Session等技术实现用户身份</p>
+<p>#请求头</p>
+<p>请求头是客户端向服务器发送请求时附带的元信息字段<br>Host：指定目标服务器的域名或IP<br>User- Agent：客户端浏览器、系统、内核的标识，服务器可据此适配内容<br>Cookie：客户端存储的会话标识，用于身份认证、会话保持<br>Content—Type：请求体的数据格式<br>Content—Length：请求体的字节长度<br>Referer：记录请求的来源页面URL<br>Accept：客户端可接受的响应数据格式<br>Accept- Encoding：客户端支持的压缩编码</p>
+<p>#响应头</p>
+<p>响应头是服务器向客户端返回响应时附带的元信息字段<br>HTTP&#x2F;1.1 200 OK：响应行，包含了HTTP版本、状态码、状态描述<br>Server：服务器软件标识（如Apache、Nginx）<br>Set- Cookie：服务器向客户端设置Cookie，用于身份认证、会话管理<br>Content- Type：响应体的数据格式<br>Content- Length：响应体的字节长度<br>Location：配合301&#x2F;302状态码，指定重定向的目标URL<br>Cache- Control：控制客户端缓存策略<br>Expires：响应的过期时间</p>
+<p>#状态码</p>
+<p>200：成功，服务器正常返回请求的资源<br>301:永久重定向（如网站域名变更后，旧URL跳转到新URL）<br>302：临时重定向（如登录后临时跳转到用户中心页面）<br>404:未找到（资源不存在）<br>500:服务器内部错误（服务器代码逻辑出错）</p>
+<p>##HTTP报文结构</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/%E4%BB%BB%E5%8A%A1%E4%B8%80.png" alt="任务一"></p>
+<p>#请求行</p>
+<p>POST&#x2F;api&#x2F;graphs&#x2F;fulltext-search?haha&#x3D;123 HTTP&#x2F;1.1<br>POST:请求方法，客户端向服务端提交数据<br>&#x2F;api&#x2F;graphs&#x2F;fulltext-search：请求路径<br>?haha&#x3D;123：URL查询参数<br>HTTP&#x2F;1.1：HTTP协议版本</p>
+<p>#请求头</p>
+<p>Host：本地<br>Cookie：身份证明<br>User-Agent：使用Edge基于Chrome内核，运行在Windows 10 64位系统上<br>Sec-Ch-Ua：浏览器版本<br>Sec-Ch-Ua-Mobile：非移动设备<br>Accept：客户端可接受的响应数据格式<br>Referer：请求来源页面URL<br>Accept-Encoding：客户端支持的压缩编码方式为gzip、deflate、br<br>Accept- Language：客户端偏好语言<br>Connection：请求完成后关闭TCP连接<br>Content- Type：请求体的数据格式为URL编码的表单数据格式（请求体内容会以key&#x3D;value&amp;key2&#x3D;value2的格式组织）<br>Content- Length：响应体的字节长度为26</p>
+<p>#空行</p>
+<p>#请求体</p>
+<p>符合Content- Type的格式，包含indexName（值为gitHub）和keyword（值为1）两个参数</p>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/10/10/报文/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#http%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">http的概念</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2025/10/10/sql/">sql</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/10/05/php/">php</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/10/10/报文/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
 </div>
       <div class="main-right-wrapper"><div class="main-right">
   <div class="main-right--board">

