@@ -373,7 +373,13 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <p>date: 2024-08-21 14:09:50<br>tags:<br>搭建过程： 1.在官网安装依赖软件Node.js及Git<br>2.在终端确认是否安装成功<br>3.注册GitHub并创建仓库<br>4.配置SSH并验证是否连接成功<br>5.在终端输入命令安装Hexo<br>6.创建博客目录并生成静态文件<br>7.配置_config.yml找到deploy的部分并安装插件<br>所遇问题：上传文章时遇到hexo d这个命令报错，在网上找了几篇文章，在这个命令前加sudo就可以正常运行了。心路历程：以前没有接触过这种，刚开始看见还是比较陌生迷茫的，之后在上网找教程，试着做了一下，发现这个过程也挺有趣的，最后完成了自己的博客感觉有点成就感。</p>
+      <p>date: 2024-08-21 14:09:50<br>tags:</p>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>在官网安装依赖软件Node.js及Git,安装Hexo-cli（执行 npm install -g hexo-cli命令）</p>
+<h1 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h1><p>新建一个文件夹为博客项目目录，执行hexo init命令，接着执行npm install,安装Hexo用运行所需的依赖包</p>
+<h1 id="注册GitHub并创建仓库"><a href="#注册GitHub并创建仓库" class="headerlink" title="注册GitHub并创建仓库"></a>注册GitHub并创建仓库</h1><p>在GitHub上创建一个新的仓库，命名格式为 GitHub用户名.github.io ，配置Hexo的部署参数，打开项目中的 _config.yml 文件，找到 deploy 部分，修改为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repo: https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>你的GitHub用户名<span class="operator">/</span>你的GitHub用户名.github.io.git</span><br><span class="line">branch: main</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置SSH并验证是否连接成功"><a href="#配置SSH并验证是否连接成功" class="headerlink" title="配置SSH并验证是否连接成功"></a>配置SSH并验证是否连接成功</h1><h1 id="所遇问题"><a href="#所遇问题" class="headerlink" title="所遇问题"></a>所遇问题</h1><p>部署后页面空白：搜索了下说可能是部署时文件路径错误，或者GitHub仓库的分支配置不对<br>解决方法：检查Hexo配置文件中 deploy 的 repo 地址是否正确，确保分支是 main （或之前的 master ，根据GitHub仓库的默认分支调整）。另外，执行 hexo generate 时要确保没有报错，生成的 public 文件夹内容完整。</p>
 
     </article>
     
@@ -395,7 +401,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">搭建过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number"></span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96Hexo"><span class="toc-number"></span> <span class="toc-text">初始化Hexo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E5%86%8CGitHub%E5%B9%B6%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="toc-number"></span> <span class="toc-text">注册GitHub并创建仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH%E5%B9%B6%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F"><span class="toc-number"></span> <span class="toc-text">配置SSH并验证是否连接成功</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98"><span class="toc-number"></span> <span class="toc-text">所遇问题</span></a>
       </div>
       
         <div class="catelogue catelogue-2">
