@@ -383,32 +383,18 @@
 <p><img src="https://github.com/Lin060807/images/raw/main/als1.png" alt="als1"></p>
 <h2 id="one-last-image"><a href="#one-last-image" class="headerlink" title="one_last_image"></a>one_last_image</h2><p>上传PHP文件报错，泄露文件在服务器上的路径</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/o1.png" alt="o1"></p>
-<?=('sys'.'tem')('env');
-通过PHP短标签和字符串拼接绕过过滤，复制路径到URL，页面会输出环境变量，在最后发现FLAG开头行
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>?<span class="operator">=</span>(<span class="string">&#x27;sys&#x27;</span>.<span class="string">&#x27;tem&#x27;</span>)(<span class="string">&#x27;env&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>通过PHP短标签和字符串拼接绕过过滤，复制路径到URL，页面会输出环境变量，在最后发现FLAG开头行</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/o2.png" alt="o2"></p>
+<h2 id="Vibe-SEO"><a href="#Vibe-SEO" class="headerlink" title="Vibe SEO"></a>Vibe SEO</h2><p>题目说到结构化站点地图，就是 sitemap.xml，是一张写给爬虫看的导航图，告诉搜索引擎：网站里有哪些页面、哪些页面比较重要、它们最近什么时候更新过。<br>访问&#x2F;sitemap.xml可以看见里面有一个&#x2F;aa__^^.php</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/Vibe1.png" alt="Vibe1"></p>
+<p>访问&#x2F;aa__^^.php 可看到的页面如下，在寻找filename通过readfine()</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/Vibe2.png" alt="Vibe3"></p>
+<p>尝试提供一个参数&#x2F;aa__^^.php?filename&#x3D;aa__^^.php 并查看它的源码可得</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/Vibe3.png" alt="Vibe3"></p>
+<p>  my_secret.txt 长度超过了 11，fopen打开了文件，但是没用fcolse关闭，在Linux中，每个打开的文件会被分配一个数字编号，叫文件描述符，从3开始，可以通过 &#x2F;proc&#x2F;self&#x2F;fd&#x2F;&lt;自然数&gt; 或 &#x2F;dev&#x2F;fd&#x2F;&lt;自然数&gt; 来访问这些文件描述符 。<br>  用python脚本攻击，一旦找到&#x2F;dev&#x2F;fd&#x2F;X，就能输出my_secret.txt 的内容，可以拿到FLAG</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/Vibe4.png" alt="Vibe4"></p>
 
-![o2](https://github.com/Lin060807/images/raw/main/o2.png)
-
-## Vibe SEO
-
-题目说到结构化站点地图，就是 sitemap.xml，是一张写给爬虫看的导航图，告诉搜索引擎：网站里有哪些页面、哪些页面比较重要、它们最近什么时候更新过。
-访问/sitemap.xml可以看见里面有一个/aa__^^.php
-
-![Vibe1](https://github.com/Lin060807/images/raw/main/Vibe1.png)
-
-访问/aa__^^.php 可看到的页面如下，在寻找filename通过readfine()
-
-![Vibe3](https://github.com/Lin060807/images/raw/main/Vibe2.png)
-
-尝试提供一个参数/aa__^^.php?filename=aa__^^.php 并查看它的源码可得
-
-![Vibe3](https://github.com/Lin060807/images/raw/main/Vibe3.png)
-
-  my_secret.txt 长度超过了 11，fopen打开了文件，但是没用fcolse关闭，在Linux中，每个打开的文件会被分配一个数字编号，叫文件描述符，从3开始，可以通过 /proc/self/fd/<自然数> 或 /dev/fd/<自然数> 来访问这些文件描述符 。
-  用python脚本攻击，一旦找到/dev/fd/X，就能输出my_secret.txt 的内容，可以拿到FLAG
-  
-![Vibe4](https://github.com/Lin060807/images/raw/main/Vibe4.png)
-
-</自然数>
     </article>
     
     <div class="read-nums">
@@ -429,7 +415,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E5%9F%BA%E9%87%8C%E6%96%AF%E8%BF%BD%E4%B9%8C%E9%BE%9F"><span class="toc-number">1.</span> <span class="toc-text">阿基里斯追乌龟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#one-last-image"><span class="toc-number">2.</span> <span class="toc-text">one_last_image</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E5%9F%BA%E9%87%8C%E6%96%AF%E8%BF%BD%E4%B9%8C%E9%BE%9F"><span class="toc-number">1.</span> <span class="toc-text">阿基里斯追乌龟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#one-last-image"><span class="toc-number">2.</span> <span class="toc-text">one_last_image</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vibe-SEO"><span class="toc-number">3.</span> <span class="toc-text">Vibe SEO</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
