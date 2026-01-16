@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——ISCTF 复现 | Hexo</title>
+  <title>我的技术与生活——极客大挑战2025 web复现 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——ISCTF 复现`
+    document.title = `我的技术与生活——极客大挑战2025 web复现`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -351,7 +351,7 @@
 
 <div class="article-container">
   <div class="article">
-    <h1 class="article-title">ISCTF 复现</h1>
+    <h1 class="article-title">极客大挑战2025 web复现</h1>
     <div class="article-info">
       <div class="article-info--item">
         <div class="article-info--info">
@@ -367,18 +367,53 @@
             
           </div>
           
-          <p class="article-info--date">日期：2026-01-16 13:40:50</p>
+          <p class="article-info--date">日期：2026-01-16 13:49:47</p>
         </div>
         <img src="/imgs/default-cover.webp" alt="" class="article-cover">
       </div>
     </div>
     <article class="article-content markdown-body">
-      
+      <h2 id="阿基里斯追乌龟"><a href="#阿基里斯追乌龟" class="headerlink" title="阿基里斯追乌龟"></a>阿基里斯追乌龟</h2><p>出现这样的页面</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/als4.png" alt="als4"> </p>
+<p>点击追赶进行抓包，出现这个页面</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/als2.png" alt="als2"></p>
+<p>对data后面的东西进行Base64解码得到</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/als3.png" alt="als3"></p>
+<p>可通过修改achilles_distance后的数据，进行Base64编码，之后修改到data后面可得</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/als1.png" alt="als1"></p>
+<h2 id="one-last-image"><a href="#one-last-image" class="headerlink" title="one_last_image"></a>one_last_image</h2><p>上传PHP文件报错，泄露文件在服务器上的路径</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/o1.png" alt="o1"></p>
+<?=('sys'.'tem')('env');
+通过PHP短标签和字符串拼接绕过过滤，复制路径到URL，页面会输出环境变量，在最后发现FLAG开头行
+
+![o2](https://github.com/Lin060807/images/raw/main/o2.png)
+
+## Vibe SEO
+
+题目说到结构化站点地图，就是 sitemap.xml，是一张写给爬虫看的导航图，告诉搜索引擎：网站里有哪些页面、哪些页面比较重要、它们最近什么时候更新过。
+访问/sitemap.xml可以看见里面有一个/aa__^^.php
+
+![Vibe1](https://github.com/Lin060807/images/raw/main/Vibe1.png)
+
+访问/aa__^^.php 可看到的页面如下，在寻找filename通过readfine()
+
+![Vibe3](https://github.com/Lin060807/images/raw/main/Vibe2.png)
+
+尝试提供一个参数/aa__^^.php?filename=aa__^^.php 并查看它的源码可得
+
+![Vibe3](https://github.com/Lin060807/images/raw/main/Vibe3.png)
+
+  my_secret.txt 长度超过了 11，fopen打开了文件，但是没用fcolse关闭，在Linux中，每个打开的文件会被分配一个数字编号，叫文件描述符，从3开始，可以通过 /proc/self/fd/<自然数> 或 /dev/fd/<自然数> 来访问这些文件描述符 。
+  用python脚本攻击，一旦找到/dev/fd/X，就能输出my_secret.txt 的内容，可以拿到FLAG
+  
+![Vibe4](https://github.com/Lin060807/images/raw/main/Vibe4.png)
+
+</自然数>
     </article>
     
     <div class="read-nums">
       <!-- id 将作为查询条件 -->
-      <span id="2026/01/16/ISCTF-复现/" class="leancloud_visitors" data-flag-title="Your Article Title">
+      <span id="2026/01/16/极客大挑战2025-web复现/" class="leancloud_visitors" data-flag-title="Your Article Title">
         <em class="post-meta-item-text">浏览量</em>
         <i class="leancloud-visitors-count"></i>
       </span>
@@ -394,7 +429,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%BF%E5%9F%BA%E9%87%8C%E6%96%AF%E8%BF%BD%E4%B9%8C%E9%BE%9F"><span class="toc-number">1.</span> <span class="toc-text">阿基里斯追乌龟</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#one-last-image"><span class="toc-number">2.</span> <span class="toc-text">one_last_image</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
@@ -424,7 +459,7 @@
     recordIP: config.recordIP,
     visitor: config.visitor,
     enableQQ: config.enableQQ,
-    path: '2026/01/16/ISCTF-复现/'
+    path: '2026/01/16/极客大挑战2025-web复现/'
   })
 </script>
 
