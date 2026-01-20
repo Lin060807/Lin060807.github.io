@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——about | Hexo</title>
+  <title>我的技术与生活——XSS | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——about`
+    document.title = `我的技术与生活——XSS`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -347,39 +347,111 @@
       <div id="main-container" class="main-container">
 
 
-  <link rel="stylesheet" href="/css/partial/about.css" />
+  <link rel="stylesheet" href="/css/partial/article.css" />
 
-<div class="about">
-  <div class="about-top">
-    <div class="about-title">
-      <h2>关于我</h2>
-    </div>
-    <div class="about-info">
-      <img class="about-avatar" src="/imgs/avatar.jpg" alt="">
-      <div class="about-detail">
-        
-          <p>姓名：10</p>
-        
-          <p>年龄：3</p>
-        
-          <p>性别：wu</p>
-        
-          <p>家乡：wu</p>
-        
-          <p>现居住地：wu</p>
-        
-          <p>职业：Wu</p>
-        
-          <p>喜欢：wu</p>
-        
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">XSS</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            
+          </div>
+          
+          <p class="article-info--date">日期：2026-01-19 18:40:10</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
       </div>
     </div>
-  </div>
-  <div class="about-content">
+    <article class="article-content markdown-body">
+      <p>XSS是指攻击者在网页中嵌入客户端脚本，当用户使用浏览器浏览网页时，脚本会在用户的浏览器上执行，从而达到攻击者的目的</p>
+<p>出现原因：程序对输入输出控制不够严格，导致脚本输入后，在输出到前端时被浏览器当作有效代码解析执行从而产生危害。</p>
+<p>分类：<br>  反射型：交互的数据不会在数据库中，一次性。eg.查询<br>  存储型：交互的数据在数据库中。eg.注册<br>  DOM型：不与后台服务器产生数据交互</p>
+
+    </article>
     
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2026/01/19/XSS/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        
+      </div>
+      
+        <div class="catelogue catelogue-2">
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2026/01/19/DVWA/">DVWA</a>
+            </p>
+          
+        </div>
+      
+    </div>
   </div>
 </div>
 
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2026/01/19/XSS/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
 
 </div>
       <div class="main-right-wrapper"><div class="main-right">
