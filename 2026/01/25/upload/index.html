@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我的技术与生活——upload | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/public.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/iconfont.css" />
+  <link rel="stylesheet" href="/css/APlayer.min.css" />
+  <script src="/js/APlayer.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.pjax.min.js"></script>
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script>
+    document.title = `我的技术与生活——upload`
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<style>
+  .load {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(37, 35, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+  }
+  .load-circle {
+    width: 80px;
+    height: 80px;
+    border: 8px solid orange;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 1s linear infinite;
+    filter: drop-shadow(0 0 3px orange);
+  }
+  .load-circle-inner {
+    width: 40px;
+    height: 40px;
+    border: 8px solid orange;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: rotate-reverse .5s linear infinite;
+  }
+  .load-text {
+    margin-top: 20px;
+    font-size: 24px;
+    color: orange;
+    display: flex;
+  }
+  .load-text span {
+    margin: 0 5px;
+    text-shadow: 5px 5px 5px orange;
+    animation: move 1s linear infinite;
+  }
+  .load-text span:nth-child(1) {
+    animation-delay: -0.6s;
+  }
+  .load-text span:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  .load-text span:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+  .load-text span:nth-child(4) {
+    animation-delay: -0.3s;
+  }
+  .load-text span:nth-child(5) {
+    animation-delay: -0.2s;
+  }
+  .load-text span:nth-child(6) {
+    animation-delay: -0.1s;
+  }
+  @keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes rotate-reverse {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes move {
+    0% { transform: translateY(0%) rotate(0) scale(1); }
+    20% { transform: translateY(20%) rotate(10deg) scale(1.2); }
+    80% { transform: translateY(-10%) rotate(-20deg) scale(.8);}
+    100% { transform: translateY(0) rotate(0) scale(1); }
+  }
+
+  .progress {
+    position: fixed;
+    left: 0; top: 0;
+    width: 0;
+    height: 3px;
+    background-color: green;
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) .1s;
+    z-index: 9999;
+  }
+
+  .to-up {
+    animation: toUp .5s 1;
+  }
+  .gray {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    background-color: #000;
+    mix-blend-mode: color;
+  }
+  @keyframes toUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0) ; opacity: 1; }
+  }
+</style>
+<body>
+  <div id="load" class="load">
+    <div class="load-circle">
+      <div class="load-circle-inner"></div>
+    </div>
+    <p class="load-text">
+      <span>L</span>
+      <span>O</span>
+      <span>A</span>
+      <span>D</span>
+      <span>I</span>
+      <span>N</span>
+      <span>G</span>
+    </p>
+  </div>
+  <div id="container" class="container w-100 vh-100" style="display: none;">
+    <header class="header">
+  <div class="header-wrapper">
+    <div class="header-left">
+      <div class="header-search">
+        <input id="search-input" type="text" class="header-search--input" placeholder="请输入要检索的文章标题" />
+        <span id="search-btn" class="header-search--icon"><i class="iconfont icon-sousuo"></i></span>
+      </div>
+      <div id="search-layer" class="header-search--layer hidden">
+        <p class="title">
+          <span>以下是搜索内容：</span>
+          <span id="close-layer-btn">关闭</span>
+        </p>
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <ul class="header-menu">
+        <li>
+          <a href="http://example.com/">
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+            <span class="header-menu--span">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/log">
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+            <span class="header-menu--span">日志</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/link">
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+            <span class="header-menu--span">友情链接</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/about">
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+            <span class="header-menu--span">关于我</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const ipt = document.querySelector('#search-input')
+  const btn = document.querySelector('#search-btn')
+  const layer = document.querySelector('#search-layer')
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
+  ipt.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  })
+  btn.addEventListener('click', () => {
+    handleSearch()
+  })
+
+  document.querySelector('#close-layer-btn').addEventListener('click', () => {
+    layer.classList.toggle('hidden')
+  })
+
+  function handleSearch() {
+    if (ipt.value.trim() === '') {
+      return
+    }
+    let html = ''
+    const targetPosts = posts.filter(post => post.title.includes(ipt.value))
+    targetPosts.forEach(post => {
+      html += `
+        <li>
+          <div>
+            <a href="/${post.path}">${post.title.replace(new RegExp(ipt.value), `<span>${ipt.value}</span>`)}</a>
+          </div>
+          <img src="${post.cover || '/imgs/default-cover.webp' }" />
+        </li>
+      `
+    })
+    if (html.trim () === '') {
+      html += '<p class="empty">没有搜索到内容</p>'
+    }
+    layer.querySelector('ul').innerHTML = html
+    layer.classList.remove('hidden')
+  }
+</script> 
+    <section id="main" class="main">
+      <div class="main-left-wrapper">
+<div class="main-left">
+  <div class="main-left--block">
+    <div class="main-left--info">
+      <img src="/imgs/avatar.jpg"" class="main-left--avatar" />
+      <div class="main-left--intro">
+        <p class="main-left--name">10Day</p>
+        <div class="main-left--tags">
+          <span class="main-left--tag">Fa</span>
+          <span class="main-left--tag">Fu</span>
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <div class="main-left--motto">
+        <p>“fa”</p>
+        <p>“fu”</p>
+      </div>
+      <div class="main-left--github">
+        <span class="line"></span>
+        <a target="_blank" rel="noopener" href="https://github.com/Lin060807/Lin060807.github.io.git"><i class="logo iconfont icon-github-fill"></i></a>
+        <span class="line"></span>
+      </div>
+      <div class="main-left--statics">
+        <a href="/categories">
+          <div>
+            <span>0</span>
+            <span>分类</span>
+          </div>
+        </a>
+        <a href="/tags">
+          <div>
+            <span>0</span>
+            <span>标签</span>
+          </div>
+        </a>
+        <a href="/archives">
+          <div>
+            <span>5 </span>
+            <span>归档</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-left--block">
+    <ul class="main-left--menu">
+      
+        <li>
+          <a href="/">
+            <span class="header-menu--span">小站首页</span>
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/log">
+            <span class="header-menu--span">个人日志</span>
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/link">
+            <span class="header-menu--span">友情链接</span>
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <span class="header-menu--span">关于自己</span>
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tools">
+            <span class="header-menu--span">我的工具</span>
+            <i class="header-menu--icon iconfont icon-gongju"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="main-left--block">
+    <div class="main-left--site">
+      <h5 class="main-left--title">
+        <span>站点信息</span>
+        <i class="iconfont icon-zhandian"></i>
+      </h5>
+      <p class="main-left--subtitle">
+        <span>文章数目：</span>
+        <span>9 篇</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>最近动态：</span>
+        <span>今天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>上线时间：</span>
+        <span>7160天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>当前版本：</span>
+        <span>v1.0.2</span>
+      </p>
+    </div>
+  </div>
+</div></div>
+      <div id="main-container" class="main-container">
+
+
+  <link rel="stylesheet" href="/css/partial/article.css" />
+
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">upload</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            
+          </div>
+          
+          <p class="article-info--date">日期：2026-01-25 20:38:41</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
+      </div>
+    </div>
+    <article class="article-content markdown-body">
+      <p>PHP一句话木马</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>?php</span><br><span class="line"><span class="variable">@eval</span>($_POST[<span class="string">&#x27;a&#x27;</span>]);</span><br><span class="line">?<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>区分前端和后端：<br>验证合法性在前端：没抓包到就显示禁止上传提示，<br>后端：</p>
+<h3 id="Pass-01（前端验证）"><a href="#Pass-01（前端验证）" class="headerlink" title="Pass-01（前端验证）"></a>Pass-01（前端验证）</h3><p>在前端验证了合法性，抓包后即可改为php文件，上传成功后可用蚁剑查看服务器目录等</p>
+<h3 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h3><p>可抓到包，即是在后端验证<br>查看源码，是通过$_FILES[‘upload_file’][‘type’]取值来判断文件类型，而$_FILES[‘upload_file’][‘type’]完全来自浏览器上传时提交的Content-Type。<br>删去content—type，发现提示文章类型不正确，说明后端是通过content—type判断文章类型，修改content—type来绕过。</p>
+<h3 id="Pass-03"><a href="#Pass-03" class="headerlink" title="Pass-03"></a>Pass-03</h3><p>出现不允许上传的类型，黑名单<br>查看源码<br>抓包后修改php为php3<br>httpd.conf文件范围全局，影响整个服务器。</p>
+<h3 id="Pass-04"><a href="#Pass-04" class="headerlink" title="Pass-04"></a>Pass-04</h3><p>查看源码，黑名单基本将后缀全部过滤掉了<br>补充:<br>   .htaccess文件解析漏洞:<br>          Sethandler将该目录和子目录的所有文件映射为PHP文件<br>          Addhandler使用php5-script处理器解析所有匹配到的文件<br>          AddType将特定扩展名文件映射为php文件类型<br>先创建一个.htaccess文件<br>内容为<br>AddType application&#x2F;x-httpd-php .ppp<br>上传.htaccess文件，再上传一个ppp文件<br>.htaccess文件，范围局部，通常作用于网站根目录或特定目录</p>
+<h3 id="Pass-05"><a href="#Pass-05" class="headerlink" title="Pass-05"></a>Pass-05</h3><p>查看源码，黑名单，禁止了.htaccess文件的上传以及大小写转换，没有被限制的后缀名有php7和ini<br>创建一个.user.ini文件内容为auto_perpend_file&#x3D;1.jpg<br>再创建一个1.jpg包含内容为<?php phpinfo();?><br>上传两个文件<br>访问readme.php即可成功</p>
+<h3 id="Pass-06"><a href="#Pass-06" class="headerlink" title="Pass-06"></a>Pass-06</h3><p>查看源码，发现与前面的相比，减少了大小写转换，将php变为Php</p>
+<h3 id="Pass-07"><a href="#Pass-07" class="headerlink" title="Pass-07"></a>Pass-07</h3><p>查看源码，发现与前面相比，缺少了首尾去空，上传php，抓包在php后面加空格</p>
+<h3 id="Pass-08"><a href="#Pass-08" class="headerlink" title="Pass-08"></a>Pass-08</h3><p>查看源码，发现与前面相比，缺少了删去文件末尾的点，deldot($file_name)，抓包在php后面加点</p>
+<h3 id="Pass-09"><a href="#Pass-09" class="headerlink" title="Pass-09"></a>Pass-09</h3><p>查看源码，发现与前面相比，缺少了去除字符串::$DATA那行，抓包后在后面加上::$DATA</p>
+<h3 id="Pass-10"><a href="#Pass-10" class="headerlink" title="Pass-10"></a>Pass-10</h3><p>查看源码，利用文件名截断特性和代码过滤顺序的漏洞<br>源码中，<br>        $file_name &#x3D; trim($_FILES[‘upload_file’][‘name’]);&#x2F;&#x2F;首尾去空<br>        $file_name &#x3D; deldot($file_name);&#x2F;&#x2F;删除文件名末尾的点<br>        $file_ext &#x3D; strrchr($file_name, ‘.’);<br>        $file_ext &#x3D; strtolower($file_ext); &#x2F;&#x2F;转换为小写<br>        $file_ext &#x3D; str_ireplace(‘::$DATA’, ‘’, $file_ext);&#x2F;&#x2F;去除字符串::$DATA<br>        $file_ext &#x3D; trim($file_ext); &#x2F;&#x2F;首尾去空<br>若将文件后缀改为.php. . (点+空格+点+空格)<br>第一步trim将文件最后的空格删除，第二步deldot删除文件最后的点，第三步strrchr找到最后一个点,返回的扩展名是.php成功执行</p>
+<h3 id="Pass-11"><a href="#Pass-11" class="headerlink" title="Pass-11"></a>Pass-11</h3><p>查看源码<br>$file_name &#x3D; str_ireplace($deny_ext,””, $file_name);<br>将黑名单的后缀替换为空，因此可以利用双写绕过，将php写成pphphp</p>
+<h3 id="Pass-12"><a href="#Pass-12" class="headerlink" title="Pass-12"></a>Pass-12</h3><p> $img_path &#x3D; $_GET[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;<br> %00只能用于低于5.3的，且php.ini中的magic_quotes_gpc设置为OFF,get方式传递到服务器会自动解码，变成了ascii码中数值0对应的字符（null）达到截断的目的。<br>如果在save_path用get传参，加上截断符（%00），可以提前结束文件名，截掉后面的jpg<br>用bp抓包，在URL中save_path&#x3D;update&#x2F;1.php%00</p>
+<h3 id="Pass-13"><a href="#Pass-13" class="headerlink" title="Pass-13"></a>Pass-13</h3><p>查看源码，这题是POST传参，$img_path &#x3D; $_POST[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;<br>通过post的话，加入%00不会被服务器解码，只会原样被参数接收，所以需要先将%00在bp里解码。<br>在bp里加入..&#x2F;upload&#x2F;1.php%00</p>
+<h3 id="Pass-14"><a href="#Pass-14" class="headerlink" title="Pass-14"></a>Pass-14</h3><p>$bin &#x3D; fread($file, 2);读取文件前两个字节，判断是否为jpg、png、gif，否则不允许上传。<br>$strInfo &#x3D; @unpack(“C2chars”, $bin); 将读取到的转化为数组，每一个键的值都是十六进制<br>$typeCode &#x3D; intval($strInfo[‘chars1’].$strInfo[‘chars2’]);将两个键分别转化为十进制再拼接<br>PNG文件头：89 50 4E 0D 0A 1A 0A<br>JPG文件头：FF D8 FF<br>GIF文件头：47494638（字符即GIF89a）<br>不检查图片内容，只要添加符合条件的文件头即可，在文件内容加上第一行GIF89a<br>include.php文件内容</p>
+<?php
+$file=$_GET['page'];
+include($file)
+?>
+
+<p>upload-labs提供了include.php文件，存在文件包含漏洞，可以利用文件包含漏洞测试上传文件，构造：include.php?file&#x3D;upload&#x2F;1.gif</p>
+<h3 id="Pass-15"><a href="#Pass-15" class="headerlink" title="Pass-15"></a>Pass-15</h3><p>getimagesize获取图片类型大小等信息<br>构造include.php?file&#x3D;upload&#x2F;6820260310210828.gif<br>同14</p>
+<h3 id="Pass-16"><a href="#Pass-16" class="headerlink" title="Pass-16"></a>Pass-16</h3><p>exif_imagetype()判断图像类型，读取一个图像的第一个字节，本函数可用来避免 调用其他exif函数用到了不支持的文件类型上或和[$_SERVER’HTTP_ACCEPT]结合使用来检查浏览器是否可以显示某个指定的图像<br>需要开启php_exif模块</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/U1.jpg" alt="U1"></p>
+<p>同14</p>
+<h3 id="Pass-17（二次渲染）"><a href="#Pass-17（二次渲染）" class="headerlink" title="Pass-17（二次渲染）"></a>Pass-17（二次渲染）</h3><p>查看源码<br>imagecreatefromjpeg（）函数可以从jpeg文件或者是URL中获取图像，使用该函数可以将一个图像资源化。该函数有一个返回值，如果执行成功，则返回图片的资源标识符。</p>
+<p>imagejpeg（）函数可以向浏览器或者文件中显示图像。该函数可以将其它格式的图片转化为jpeg格式，对图片内容进行更改，及“二次渲染”。</p>
+<p>二次渲染图片上传前后大小不一致，避免木马被删除，需要找到保留部分。不同类型图片校验严格程度不同，gif最松，png更严格，jpg最严格。</p>
+<p>fileext和filetype检验是否为gif格式，使用move_uploaded_file()函数做判断条件，如果成功会将文件移动到$target_path<br>在一张gif图片中找到经过二次渲染中没有变化的部分加入一句话木马</p>
+<h3 id="Pass-18"><a href="#Pass-18" class="headerlink" title="Pass-18"></a>Pass-18</h3><p>查看源码<br>rename($upload_file, $img_path);如果符合条件就重命名<br>unlink($upload_file);符合条件上传后重命名，如果不符合直接删除<br>由于服务器处理不同请求是并发进行的，因此并发处理不当或相关操作设计不合理就会导致条件竞争漏洞。<br>上传php文件需要在它删除之前访问。</p>
+<p>因为上传到文件会被删除，所以生成一个1.php，内容为<?php fputs(fopen('demo2.php','w'),'<?php @eval($_POST["a"])?>‘)?&gt;，作用是被访问时自动写入一句话木马到demo2.php，最终木马为demo2.php不会被删除</p>
+<p>浏览器上传1.php，bp拦截，将请求包发送Intruder，选择battering ram，再点击到payload页面，选择number，1-1000，启动攻击，持续上传1.php，保证文件临时存在。<br>运行pyhon脚本access.py，不停访问1.php,不停检查demo.php是否生成，在服务器删除1.php之前，触发它执行，生成demo2.php，在终端输入python access.py，运行脚本，直至输出OK。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request</span><br><span class="line">import <span class="type">time</span></span><br><span class="line"></span><br><span class="line">url <span class="operator">=</span> &quot;http://127.0.0.1/upload/upload/1.php&quot;</span><br><span class="line">print(&quot;触发生成 demo2.php...&quot;)</span><br><span class="line">while <span class="literal">True</span>:</span><br><span class="line">    try:</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(url, timeout<span class="operator">=</span><span class="number">0.3</span>) <span class="keyword">as</span> res:</span><br><span class="line">            if res.getcode() <span class="operator">=</span><span class="operator">=</span> <span class="number">200</span>:</span><br><span class="line">                print(&quot;成功触发！demo2.php 已生成&quot;)</span><br><span class="line">                break</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        pass</span><br><span class="line">    time.sleep(<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<p>用蚁剑连接可得<br><img src="https://github.com/Lin060807/images/raw/main/U2.jpg" alt="U2"></p>
+<h3 id="Pass-19"><a href="#Pass-19" class="headerlink" title="Pass-19"></a>Pass-19</h3><p>查看源码，这关也存在竞争问题，对文件后缀名做了白名单判断，然后进一步检查文件大小、文件是否存在等，因此也可以通过不断上传图片马，由于条件竞争来不及重命名，上传成功</p>
+<p>条件竞争漏洞在上传源码中的特征：文件先被写入磁盘再被删除，中间存在一个可被利用的时间窗口。<br>典型漏洞代码结构</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="number">1.</span> 先把文件从临时目录移动到上传目录</span><br><span class="line">move_uploaded_file($tmp_file, $upload_file);</span><br><span class="line"></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="number">2.</span> 再做后缀<span class="operator">/</span>内容校验</span><br><span class="line">if (<span class="operator">!</span>in_array($ext, $white_list)) &#123;</span><br><span class="line">    <span class="operator">/</span><span class="operator">/</span> <span class="number">3.</span> 校验不通过，才删除文件</span><br><span class="line">    unlink($upload_file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本关move()将文件从临时目录写到服务器目标路径，renameFile()对已存在的文件进行重命名，与上题相似</p>
+<h3 id="Pass-20"><a href="#Pass-20" class="headerlink" title="Pass-20"></a>Pass-20</h3><p>查看源码，发现move_uploaded_file()函数中的img_path是由post参数save_name控制的，因此可以在save_name</p>
+<p>move_uploaded_file()函数会忽略末尾的&#x2F;. ，在保存文件名时加上最后会直接将&#x2F;.删掉</p>
+<h3 id="Pass-21"><a href="#Pass-21" class="headerlink" title="Pass-21"></a>Pass-21</h3><p>检查MIME，判断save_name是否为空、判断$file是否为数组，explode()将文件名拆分成数组，假设上传为xxx.php.jpg，被拆分为[0]&#x3D;xxx,[1]&#x3D;php,[2]&#x3D;jpg不是数组就以.分割为数组，end()取$file最后一个元素，作为文件后缀检查，重新组合文件名，重组文件名，reset()函数返回第一个元素值，用.拼接，count()统计元素个数，将第一个元素与最后一个元素组成文件名，例如xxx.jpg。</p>
+<p>漏洞存在于元素可以构造，[1]第二个元素为空，第三个元素用于绕过白名单验证，第一个元素为xxx.php，count（）计算只有两个元素，将[1]与[0]进行拼接，为xxx.php+.空，系统特性会删除文件尾部的店，使得上传的文件为xxx.php</p>
+<p>上传1.php文件，命名为1.jpg，bp抓包，修改MIME类型，将Content—Type改为image&#x2F;png等图片类型，拦截appliation&#x2F;x-php类型</p>
+<p>在save_name参数构造数组，save_name[0]&#x3D;1.php,save_name[2]&#x3D;jpg,这样命名可以强制将文件名命名为1.php+空，最终保存1.php文件，图片上传成功</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/U3.jpg" alt="U3"></p>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2026/01/25/upload/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-01%EF%BC%88%E5%89%8D%E7%AB%AF%E9%AA%8C%E8%AF%81%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">Pass-01（前端验证）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-02"><span class="toc-number">2.</span> <span class="toc-text">Pass-02</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-03"><span class="toc-number">3.</span> <span class="toc-text">Pass-03</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-04"><span class="toc-number">4.</span> <span class="toc-text">Pass-04</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-05"><span class="toc-number">5.</span> <span class="toc-text">Pass-05</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-06"><span class="toc-number">6.</span> <span class="toc-text">Pass-06</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-07"><span class="toc-number">7.</span> <span class="toc-text">Pass-07</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-08"><span class="toc-number">8.</span> <span class="toc-text">Pass-08</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-09"><span class="toc-number">9.</span> <span class="toc-text">Pass-09</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-10"><span class="toc-number">10.</span> <span class="toc-text">Pass-10</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-11"><span class="toc-number">11.</span> <span class="toc-text">Pass-11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-12"><span class="toc-number">12.</span> <span class="toc-text">Pass-12</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-13"><span class="toc-number">13.</span> <span class="toc-text">Pass-13</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-14"><span class="toc-number">14.</span> <span class="toc-text">Pass-14</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-15"><span class="toc-number">15.</span> <span class="toc-text">Pass-15</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-16"><span class="toc-number">16.</span> <span class="toc-text">Pass-16</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-17%EF%BC%88%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93%EF%BC%89"><span class="toc-number">17.</span> <span class="toc-text">Pass-17（二次渲染）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-18"><span class="toc-number">18.</span> <span class="toc-text">Pass-18</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-19"><span class="toc-number">19.</span> <span class="toc-text">Pass-19</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-20"><span class="toc-number">20.</span> <span class="toc-text">Pass-20</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-21"><span class="toc-number">21.</span> <span class="toc-text">Pass-21</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2026/01/16/极客大挑战2025-web复现/">极客大挑战2025 web复现</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2026/01/25/upload/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
+</div>
+      <div class="main-right-wrapper"><div class="main-right">
+  <div class="main-right--board">
+    <div class="main-right--title">
+      <h5>公告栏</h5>
+      <i class="iconfont icon-gonggao"></i>
+    </div>
+    <div class="main-right--content">
+      Hello~学习中 
+    </div>
+  </div>
+
+  <div id="aplayer" class="main-right--music"></div>
+
+  <div class="operate-items">
+    <div class="operate-item backtop">
+      <i class="iconfont icon-huidaodingbu"></i>
+      <span>回到顶部</span>
+    </div>
+    
+    <div class="operate-item turn-comment hidden">
+      <i class="iconfont icon-pinglun"></i>
+      <span>查看评论</span>
+    </div>
+    
+  </div>
+
+  <div class="main-right--site">
+    <div class="main-right--power">
+      <p>Power By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a>.</p>
+      <p>Theme：<a target="_blank" rel="noopener" href="https://github.com/Aizener/hexo-theme-cola">Cola.</a></p>
+    </div>
+    <p class="main-right--refer"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2022005384号-1</a> </p>
+  </div>
+</div>
+
+<script>
+  function setOperateItem () {
+    const reg = /\d{4}\/\d{2}\/\d{2}\/.+/
+    const path = location.pathname
+    const operateDom = document.querySelector('.main-right .operate-items')
+    const commentDom = document.querySelector('.turn-comment')
+    const cateloguDom = document.querySelector('.article-catelogue > .article-catelogue--wrapper');
+
+    if (commentDom) {
+      if (reg.test(path) || path.match(/\/log\/.+/)) {
+        commentDom.classList.remove('hidden')
+        const newDom = operateDom.cloneNode(true);
+        const _backtopDom = newDom.querySelector('.backtop');
+        const _commentDom = newDom.querySelector('.turn-comment');
+        _backtopDom.addEventListener('click', () => backTopEvent());
+        _commentDom.addEventListener('click', () => commentDomEvent());
+        cateloguDom.appendChild(newDom);
+      } else {
+        commentDom.classList.add('hidden')
+      }
+    }
+  }
+
+  setOperateItem()
+  const musics = JSON.parse(`[{"name":"你要的全拿走","artist":"胡彦彬","url":"https://github.com/Lin060807/music/raw/main/你要的全拿走.mp3","cover":"https://img2.baidu.com/it/u=1260056724,1076343118&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"},{"name":"年轮","artist":"张碧晨","url":"https://github.com/Lin060807/music/raw/main/年轮.mp3","cover":"https://img2.baidu.com/it/u=705831265,2862720033&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"}]`)
+  const ap = new APlayer({
+    container: document.querySelector('#aplayer'),
+    audio: musics,
+  })
+
+  $(document).on('pjax:complete', function() {
+    setOperateItem()
+  })
+
+  document.querySelector('.backtop').addEventListener('click', () => {
+    backTopEvent();
+  })
+  const dom = document.querySelector('.turn-comment')
+  dom && dom.addEventListener('click', () => {
+    commentDomEvent();
+  })
+
+  function backTopEvent() {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  function commentDomEvent() {
+    const commentDom = document.querySelector('.comments-intro')
+    if (!commentDom) return
+    const top = commentDom.offsetTop, height = commentDom.offsetHeight
+    document.documentElement.scrollTo({
+      top: top - 2 * height,
+      behavior: 'smooth'
+    })
+  }
+</script></div>
+    </section>
+  </div>
+  <div id="progress" class="progress"></div>
+  <div id="gray" class="gray"></div>
+
+  <script>
+    function initScroll () {
+      document.addEventListener('scroll', () => {
+        const doc = document.documentElement
+        const scrollTop = doc.scrollTop
+        const pageHeight = doc.offsetHeight
+        const clientHeight = doc.clientHeight
+        const ratio = scrollTop / (pageHeight - clientHeight)
+        const progress = document.querySelector('#progress')
+        const avatarImg = document.querySelector('.main-left--avatar')
+        progress.style.width = (100 * ratio) + '%'
+        avatarImg.style.transform = `rotate(${360 * ratio}deg)`
+      })
+    }
+
+    const rootPath = "/"
+
+    const checkAndSetArticlePageLayout = () => {
+      const path = location.pathname.replace(rootPath, '');
+      if (
+        /^\/?\d{4}\/\d{2}\/\d{2}\/.*/.test(path) ||
+        /^log\/.+/.test(path)
+      ) {
+        $('.main-container, .main-right, .main-right-wrapper').addClass('is-article')
+      } else {
+        $('.main-container, .main-right, .main-right-wrapper').removeClass('is-article')
+      }
+    }
+
+    const gray = "none"
+    const setGrayStyle = () => {
+      if (gray === 'none') {
+        return
+      } else if (gray === 'index') {
+        location.pathname === '/' ? $('#gray').show() : $('#gray').hide()
+      } else if (gray === 'all') {
+        $('#gray').show()
+      }
+    }
+    setGrayStyle()
+
+
+    window.onload = function () {
+      checkAndSetArticlePageLayout()
+      setTimeout(() => {
+        $('#load').slideUp()
+        $('#container').slideToggle()
+        setTimeout(() => {
+          initScroll();
+        }, 500)
+      }, 500)
+    }
+    
+    let status = 0
+    // 对所有链接跳转事件绑定pjax容器container
+    $(document).pjax('a[target!=_blank]', '#main-container', {
+      container: '#main-container',
+      fragment: '#main-container',
+      timeout: 8000
+    })
+
+    $(document).on('pjax:start', function() {
+    })
+    $(document).on('pjax:complete', function() {
+      status = 0
+      $('.main-container').addClass('to-up').on('animationend', function() {
+        $(this).removeClass('to-up')
+      })
+      setGrayStyle()
+      checkAndSetArticlePageLayout()
+    })
+    $(document).on('pjax:popstate', function() {
+      status = -1
+      checkAndSetArticlePageLayout()
+    });
+  </script>
+</body>
+</html>
