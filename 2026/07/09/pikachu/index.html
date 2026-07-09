@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"php","path":"2025/10/05/php/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"php","path":"2025/10/05/php/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -382,6 +382,55 @@
 <p><img src="https://github.com/Lin060807/images/raw/main/p4.png" alt="p4"></p>
 <p>登录成功</p>
 <p><img src="https://github.com/Lin060807/images/raw/main/p5.png" alt="p5"></p>
+<h1 id="验证码绕过（on-server）"><a href="#验证码绕过（on-server）" class="headerlink" title="验证码绕过（on server）"></a>验证码绕过（on server）</h1><p>这一关需要设置bp的MIME type过滤器，将Image勾选上</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p6.png" alt="p6"></p>
+<p>在历史记录可以看见每次刷新验证码会向服务器发送请求，响应包中Set-Cookie会将新的验证码返回前端，利用这个逻辑进行暴力破解。</p>
+<p>此时返回的验证码就是前端显示的验证码值，利用这个逻辑要使用bp上的Macros功能</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p7.png" alt="p7"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p8.png" alt="p8"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p9.png" alt="p9"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p10.png" alt="p10"></p>
+<p>最后与上一关相同，进行密码爆破</p>
+<h1 id="验证码绕过（on-client）"><a href="#验证码绕过（on-client）" class="headerlink" title="验证码绕过（on client）"></a>验证码绕过（on client）</h1><p>验证码在前端JS生成，近在前端进行校验，说明只需要输入一次正确的验证码之后删除验证码即可重复发送进行爆破</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p11.png" alt="p11"></p>
+<p>在bp中抓包，删除验证码发现一样可以回显</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p12.png" alt="p12"></p>
+<p>接下来进行爆破即可</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p13.png" alt="p13"></p>
+<h1 id="token防爆破"><a href="#token防爆破" class="headerlink" title="token防爆破?"></a>token防爆破?</h1><p>将请求包发送爆破，现在需要爆破password 和token 字段，此处的攻击模式要变成Pitchfork</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p14.png" alt="p14"></p>
+<p>payload 1直接用字典爆破<br>payload 2用递归索引（从上一次响应结果取部分特定内容作为下次请求的Payload模式）</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p15.png" alt="p15"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p16.png" alt="p16"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p17.png" alt="p17"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p18.png" alt="p18"></p>
+<p>返回开始爆破即可</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p19.png" alt="p19"></p>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><p>程序对用户输入输出没有做合适的处理，导致“精心构造”的字符输出在前端被浏览器当作有效代码解析执行产生危害</p>
+<h1 id="反射型XSS（get）"><a href="#反射型XSS（get）" class="headerlink" title="反射型XSS（get）"></a>反射型XSS（get）</h1><p>尝试输入123，发现123加载到了p标签中</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p20.png" alt="p20"></p>
+<p>发现有长度限制将最大程度的数字删除，之后输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>script<span class="operator">&gt;</span>alert(document.cookie)<span class="operator">&lt;</span><span class="operator">/</span>alert<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>出现cookie</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p21.png" alt="p21"></p>
+<h1 id="反射型XSS（POST）"><a href="#反射型XSS（POST）" class="headerlink" title="反射型XSS（POST）"></a>反射型XSS（POST）</h1><p>post提交方式<br>抓包之后在message里输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>script<span class="operator">&gt;</span>alert(document.cookie)<span class="operator">&lt;</span><span class="operator">/</span>script<span class="operator">&gt;</span></span><br><span class="line">````</span><br><span class="line"></span><br><span class="line"><span class="operator">!</span>[p22](https:<span class="operator">/</span><span class="operator">/</span>github.com<span class="operator">/</span>Lin060807<span class="operator">/</span>images<span class="operator">/</span>raw<span class="operator">/</span>main<span class="operator">/</span>p22.png)</span><br><span class="line"></span><br><span class="line"># 存储型XSS</span><br><span class="line"></span><br><span class="line">输入的内容会被存储到数据库中，当用户访问时会将数据库的查询结果显示到页面上</span><br><span class="line"></span><br><span class="line">```<span class="keyword">sql</span></span><br><span class="line"><span class="operator">&lt;</span>script<span class="operator">&gt;</span>alert(document.cookie)<span class="operator">&lt;</span><span class="operator">/</span>script<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/Lin060807/images/raw/main/p23.png" alt="p23"></p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p24.png" alt="p24"></p>
+<h1 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h1><p>js中，从url获得参数并将其作为js执行，可能导致DOM XSS漏洞</p>
+<p>在输入框输入后发现前端代码直接将值附给了a标签的href，导致xss漏洞产生</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p25.png" alt="p25"></p>
+<p>于是输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:alert(document.cookie)</span><br></pre></td></tr></table></figure>
+
+<p>点击下面的what do you see? 可以出现cookie</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p26.png" alt="p26"></p>
+<h1 id="DOM型XSS-xss-x"><a href="#DOM型XSS-xss-x" class="headerlink" title="DOM型XSS xss-x"></a>DOM型XSS xss-x</h1><p>同上</p>
+<h1 id="XSS之盲打"><a href="#XSS之盲打" class="headerlink" title="XSS之盲打"></a>XSS之盲打</h1><p>XSS盲打是一种XSS漏洞利用方式。攻击者在网站留言板、反馈建议等功能提交恶意xss payload，如果网页存在xss漏洞，当管理员在后台查看用户留言就会执行xss payload。<br>XSS盲打主要目的是通过加载外部的恶意js文件，获取管理员后台的cookie信息，盗取管理员身份。</p>
+<p>在留言板留下恶意xss payload</p>
+<p><img src="https://github.com/Lin060807/images/raw/main/p27.png" alt="p27"></p>
+<p>之后点击右上角提示一下，出现登录后台地址<br>当登录后台之后，注入的恶意xss payload执行，出现cookie</p>
 
     </article>
     
@@ -403,7 +452,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">暴力破解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number"></span> <span class="toc-text">基于表单的暴力破解</span></a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">暴力破解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%A1%A8%E5%8D%95%E7%9A%84%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number"></span> <span class="toc-text">基于表单的暴力破解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88on-server%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">验证码绕过（on server）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E7%BB%95%E8%BF%87%EF%BC%88on-client%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">验证码绕过（on client）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#token%E9%98%B2%E7%88%86%E7%A0%B4"><span class="toc-number"></span> <span class="toc-text">token防爆破?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS"><span class="toc-number">1.</span> <span class="toc-text">XSS</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS%EF%BC%88get%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">反射型XSS（get）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8BXSS%EF%BC%88POST%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">反射型XSS（POST）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM%E5%9E%8BXSS"><span class="toc-number"></span> <span class="toc-text">DOM型XSS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM%E5%9E%8BXSS-xss-x"><span class="toc-number"></span> <span class="toc-text">DOM型XSS xss-x</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XSS%E4%B9%8B%E7%9B%B2%E6%89%93"><span class="toc-number"></span> <span class="toc-text">XSS之盲打</span></a>
       </div>
       
         <div class="catelogue catelogue-2">
