@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>我的技术与生活——web1 | Hexo</title>
+  <title>我的技术与生活——网络资产的收集 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -16,7 +16,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `我的技术与生活——web1`
+    document.title = `我的技术与生活——网络资产的收集`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -351,7 +351,7 @@
 
 <div class="article-container">
   <div class="article">
-    <h1 class="article-title">web1</h1>
+    <h1 class="article-title">网络资产的收集</h1>
     <div class="article-info">
       <div class="article-info--item">
         <div class="article-info--info">
@@ -367,39 +367,18 @@
             
           </div>
           
-          <p class="article-info--date">日期：2026-05-09 14:36:27</p>
+          <p class="article-info--date">日期：2026-07-13 09:40:37</p>
         </div>
         <img src="/imgs/default-cover.webp" alt="" class="article-cover">
       </div>
     </div>
     <article class="article-content markdown-body">
-      <p>1.bp抓包，将身份改成admin，出现页面</p>
-<p>页面提示：</p>
-<p>联调说明：preview-readme.txt</p>
-<p>预览凭据A、预览凭据B（两个输入框）</p>
-<p>诊断地址输入框</p>
-<p>2.访问文件preview-readme.txt<br>得到<br>仅供值班管理员使用。</p>
-<p>预览器只用于查看本机内部诊断结果，不支持外部地址。</p>
-<p>原型阶段的双人复核逻辑已单独摘录，调试时可直接查看：admin.php</p>
-<p>诊断地址命名规则已从后台原型迁出，当前以 route-index.txt 为准。</p>
-<p>3.访问 route-index.txt<br>[内部诊断路由索引]</p>
-<p>当前仍保留的诊断别名如下：</p>
-<ul>
-<li>health  -&gt; &#x2F;internal&#x2F;health</li>
-<li>mailq   -&gt; &#x2F;internal&#x2F;queue</li>
-<li>final   -&gt; &#x2F;internal&#x2F;report?view&#x3D;flag&amp;slot&#x3D;last<br>4.绕过双人复核</li>
-</ul>
-<p>两个 token 不能完全相同</p>
-<p>但需要满足某种相等关系（弱类型比较）</p>
-<p>尝试经典的 PHP md5 碰撞：</p>
-<p>token_a &#x3D; 240610708<br>token_b &#x3D; QNKCDZO</p>
-<p>5.target_url&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/internal/report?view=flag&slot=last">http://127.0.0.1/internal/report?view=flag%26slot=last</a></p>
-
+      
     </article>
     
     <div class="read-nums">
       <!-- id 将作为查询条件 -->
-      <span id="2026/05/09/web1/" class="leancloud_visitors" data-flag-title="Your Article Title">
+      <span id="2026/07/13/网络资产的收集/" class="leancloud_visitors" data-flag-title="Your Article Title">
         <em class="post-meta-item-text">浏览量</em>
         <i class="leancloud-visitors-count"></i>
       </span>
@@ -419,16 +398,11 @@
       </div>
       
         <div class="catelogue catelogue-2">
-          
-            <p>
-              <span>上一篇：</span>
-              <a href="/2026/07/09/pikachu/">pikachu</a>
-            </p>
            
           
             <p>
               <span>下一篇</span>
-              <a href="/2026/04/30/SSTI/">SSTI</a>
+              <a href="/2026/07/09/pikachu/">pikachu</a>
             </p>
           
         </div>
@@ -450,7 +424,7 @@
     recordIP: config.recordIP,
     visitor: config.visitor,
     enableQQ: config.enableQQ,
-    path: '2026/05/09/web1/'
+    path: '2026/07/13/网络资产的收集/'
   })
 </script>
 
