@@ -193,7 +193,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"},{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"php","path":"2025/10/05/php/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"网络资产的收集","path":"2026/07/13/网络资产的收集/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"}]`)
+  const posts = JSON.parse(`[{"title":"ISCTF 复现","path":"2026/01/16/ISCTF-复现/"},{"title":"How to build up a blog site using Hexo and Guithub Pages","path":"2024/08/21/How-to-build-up-a-blog-site-using-Hexo-and-Guithub-Pages/"},{"title":"Kali渗透Windows服务器","path":"2026/04/01/Kali渗透Windows服务器/"},{"title":"PHP伪协议","path":"2026/04/02/PHP伪协议/"},{"title":"NSSCTF","path":"2026/03/21/NSSCTF/"},{"title":"PHP反序列化","path":"2026/04/06/PHP反序列化/"},{"title":"PHP命令执行","path":"2026/04/22/PHP命令执行/"},{"title":"SSTI","path":"2026/04/30/SSTI/"},{"title":"VScode","path":"2025/09/19/VScode/"},{"title":"ctfplus","path":"2026/03/17/ctfplus/"},{"title":"pikachu","path":"2026/07/09/pikachu/"},{"title":"sql","path":"2025/10/10/sql/"},{"title":"sqlmap","path":"2026/03/30/sqlmap/"},{"title":"web1","path":"2026/05/09/web1/"},{"title":"php","path":"2025/10/05/php/"},{"title":"upload","path":"2026/01/25/upload/"},{"title":"web任务","path":"2025/10/04/web任务/"},{"title":"xss-labs","path":"2026/07/14/xss-labs/"},{"title":"文件包含","path":"2026/04/12/文件包含/"},{"title":"极客大挑战2025 web复现","path":"2026/01/16/极客大挑战2025-web复现/"},{"title":"网络资产的收集","path":"2026/07/13/网络资产的收集/"},{"title":"虚拟机搭建","path":"2024/09/15/虚拟机搭建/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -327,7 +327,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>21 篇</span>
+        <span>22 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -335,7 +335,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>7281天</span>
+        <span>7284天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -378,7 +378,55 @@
 <p>渗透测试：<br>  尽可能全面&#x2F;尽可能多<br>  主要以发现安全漏洞为主<br>    常见web漏洞–sql注入、xss、csrf、ssrf、文件上传文件包含、任意文件读取、任意文件下载、目录遍历等，<br>    逻辑漏洞–<br>      越权漏洞（水平&#x2F;垂直），<br>      支付漏洞，<br>      优惠券(刷优惠券)，<br>      任意密码重置，<br>      任意用户注册，<br>      登录&#x2F;修改密码（登录–判断用户是否存在、判断密码是否正确、提示用户名不存在&#x2F;密码错误可以考虑枚举  &#x2F;二次认证（短信验证码–短信轰炸（横向&#x2F;纵向）&#x2F;绕过）  &#x2F;图片验证码(验证码重复使用&#x2F;验证码可识别&#x2F;绕过验证码)<br>      修改密码&#x2F;忘记密码–确定用户是否存在（二次认证–手机号验证（返回包带有验证码）、邮箱验证码、修改密码的链接发送到邮箱（用户名+新密码），保密）</p>
 <h1 id="站点-IP地址"><a href="#站点-IP地址" class="headerlink" title="站点&#x2F;IP地址"></a>站点&#x2F;IP地址</h1><p>渗透测试</p>
 <h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><h1 id="资产收集"><a href="#资产收集" class="headerlink" title="资产收集"></a>资产收集</h1><p>红队&#x2F;蓝队<br>子单位信息搜取<br>  单位和企业的信息收集<br>  控股百分之50以上或百分百（爱企查、企查查–可得子公司、邮箱、地址等）<br>    自动化工具–enscan tscan无影<br>    ai搜索<br>域名<br>  根域名–搜索引擎搜索–官网<br>       –备案网站（beian.mit.gov.cn）<br>  网络空间搜索引擎–<a target="_blank" rel="noopener" href="https://fofa.info/">https://fofa.info/</a></p>
-<p>  子域名–搜索引擎<br>         自动化工具 icp.name&#x3D;’’<br>ip<br>  ping域名–cdn（内容分发网络–隐藏真实服务器地址、节省资源–绕过方式：全球ping）<br>端口&#x2F;服务<br>  御剑&#x2F;fscan&#x2F;kscan&#x2F;nmap&#x2F;masscan&#x2F;naabu<br>微信公众号&#x2F;微信小程序&#x2F;服务号 抓包charles</p>
+<p>  子域名–搜索引擎<br>         自动化工具 icp.name&#x3D;’’<br>ip<br>  ping域名–cdn（内容分发网络–隐藏真实服务器地址、节省资源–绕过方式：全球ping）<br>端口&#x2F;服务<br>  御剑&#x2F;fscan&#x2F;kscan&#x2F;nmap&#x2F;masscan&#x2F;naabu<br>微信公众号&#x2F;微信小程序&#x2F;服务号&#x2F;小蓝本 抓包charles</p>
+<h1 id="敏感信息收集"><a href="#敏感信息收集" class="headerlink" title="敏感信息收集"></a>敏感信息收集</h1><p>企业信息–爱企查（邮箱、电话）<br>个人信息–搜素引擎、零零信安<br>默认密码<br>应用说明文档<br>源码信息–github.com、gitee.com<br>语雀&#x2F;csdn&#x2F;百度云盘<br>site&#x3D;xmu.edu.cn 学号</p>
+<p>收集顺序<br>  单位–根域名–子域名–ip–服务探测<br>  web资产：指纹识别、漏洞扫描<br>  其他服务：爆破破解<br>自动化收集<br>  dns 工具<br>  域名–oneforall–nmap&#x2F;naabu–端口资产–指纹识别<br>  做成系统<br>ai汇总，ai收集<br>总结汇总</p>
+<h3 id="指纹识别和扫描"><a href="#指纹识别和扫描" class="headerlink" title="指纹识别和扫描"></a>指纹识别和扫描</h3><h2 id="指纹识别"><a href="#指纹识别" class="headerlink" title="指纹识别"></a>指纹识别</h2><p>  识别网站的组成</p>
+<pre><code>前端
+   html、css、js
+   外部引用
+   框架（web前端框架漏洞）
+   
+后端
+   编程语言
+      java、php、.net、（前两者常见，这三个主要用在网站）   go、python（这两个常用来写脚本、poc--检测脚本、exp--利用脚本）
+   二开
+      若依
+      JEECG-boot（低代码➕零代码智能开发）
+   开发框架
+      Apache strusts 2、spring-boot（Api接口-未授权漏洞）---java
+      ThinkPHP---php
+   中间件（web.body）
+      apache tomcat--后台管理弱口令，jar包getshell，put文件上传
+      nginx
+      weblogic
+      iis--几点几版本、常见漏洞
+   其他组件
+      Nacos--弱口令（nacos nacos）、任意文件读取、认证绕过--添加账号
+      shiro--反序列化漏洞、认证绕过
+      
+服务器
+   windows
+   Linux
+   国产的操作系统
+   
+数据库
+   mysql、sql server、github.com、access、orcle、redis、国产数据库
+   
+</code></pre>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><pre><code>快速分析组成、分析漏洞
+工具
+   chrome插件--wappalyzer、雪瞳、findsomething
+   公开指纹识别
+   本地工具--httpx、whole、xapp、tscan
+漏洞扫描
+     主机漏洞扫描--Nessus
+     web漏洞扫描--awvs、goby、tscan  、xray、nulei
+弱口令扫描
+    超级弱口令
+httpgo、棱动
+工具箱--one fox
+</code></pre>
 
     </article>
     
@@ -400,10 +448,15 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%8D%95%E4%BD%8D%EF%BC%88%E7%BA%A2%E9%98%9F%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">多个单位（红队）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E5%8D%95%E4%BD%8D%EF%BC%88%E7%BA%A2%E9%98%9F-%E8%93%9D%E9%98%9F-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">单个单位（红队&#x2F;蓝队&#x2F;渗透测试）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%99%E7%82%B9-IP%E5%9C%B0%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">站点&#x2F;IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7%E6%94%B6%E9%9B%86"><span class="toc-number"></span> <span class="toc-text">资产收集</span></a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87"><span class="toc-number">1.</span> <span class="toc-text">目标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E5%8D%95%E4%BD%8D%EF%BC%88%E7%BA%A2%E9%98%9F%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">多个单位（红队）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%B8%AA%E5%8D%95%E4%BD%8D%EF%BC%88%E7%BA%A2%E9%98%9F-%E8%93%9D%E9%98%9F-%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">单个单位（红队&#x2F;蓝队&#x2F;渗透测试）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%99%E7%82%B9-IP%E5%9C%B0%E5%9D%80"><span class="toc-number"></span> <span class="toc-text">站点&#x2F;IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.</span> <span class="toc-text">信息收集</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B5%84%E4%BA%A7%E6%94%B6%E9%9B%86"><span class="toc-number"></span> <span class="toc-text">资产收集</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number"></span> <span class="toc-text">敏感信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E5%92%8C%E6%89%AB%E6%8F%8F"><span class="toc-number">0.1.</span> <span class="toc-text">指纹识别和扫描</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">指纹识别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-number">2.</span> <span class="toc-text">目的</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2026/07/14/xss-labs/">xss-labs</a>
+            </p>
            
           
             <p>
